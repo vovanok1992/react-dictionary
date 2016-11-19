@@ -10,8 +10,7 @@ console.log('Start application... ');
 window.dict = dictionary;
 
 ReactDOM.render(
-    <Layout />,
-    document.body.appendChild(document.getElementById("app"))
+    <Layout />, document.getElementById("app")
 );
 
 
