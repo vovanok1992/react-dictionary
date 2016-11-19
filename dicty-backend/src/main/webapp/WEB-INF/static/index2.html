@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/test.css">
+</head>
+<body>
+    <h1 class="test">This is test 2</h1>
+
+    <p> Key is <b>trnsl.1.1.20161106T130008Z.698f52107162a893.b1c487d8cb39dd7d48b0eb96e3ec62069bb581a0</b></p>
+
+    <p>Request syntax
+        <code>
+            https://translate.yandex.net/api/v1.5/tr.json/translate ?
+            key=API key
+            & text=text to translate
+            & lang=translation direction
+            & [format=text format]
+            & [options=translation options]
+                & [callback=name of the callback function]
+        </code>
+    </p>
+
+    <script>
+        function translate(word, lang){
+            var promise = new Promise(function(resolve, reject){
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20161106T130008Z.698f52107162a893.b1c487d8cb39dd7d48b0eb96e3ec62069bb581a0&amp;text=' + word + '&amp;lang=' + lang, false);
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        resolve(JSON.parse(xhr.responseText));
+                    }
+                };
+                xhr.send();
+            });
+            return promise;
+        }
+
+        function test(word){
+            translate(word, "en-ru").then(function(data){
+               alert(data["text"]);
+            });
+        }
+    </script>
+
+</body>
+</html>

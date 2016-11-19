@@ -1,0 +1,1 @@
+cd ..\dicty-frontend
