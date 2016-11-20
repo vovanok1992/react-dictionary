@@ -20,5 +20,5 @@ class Translator {
 }
 
 const translator = new Translator();
-window.translator = translator;
+
 export default translator;

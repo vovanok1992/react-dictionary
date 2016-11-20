@@ -1,9 +1,6 @@
 /**
  * Created by Vovan on 16.11.2016.
  */
-/**
- * Created by Vovan on 11.11.2016.
- */
 
 import { EventEmitter } from "events";
 import dispatcher from '../dispatcher'

@@ -46,5 +46,4 @@ class WordsStore extends EventEmitter  {
 
 const wordStore = new WordsStore();
 dispatcher.register(wordStore.handleActions.bind(wordStore));
-window.dispatcher = dispatcher;
 export default wordStore;

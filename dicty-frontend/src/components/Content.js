@@ -82,8 +82,24 @@ export default class Content extends React.Component {
             alert("Please enter some text to translation");
             return;
         }
+
+        var firstIsRussian = this.isRussian(this.state.inputWord);
+        if (firstIsRussian && this.isRussian(this.state.translation)) {
+            alert("You have cyryllic symbols in both input fields. Can not determine how to save this.");
+            return;
+        }
+
+        if (firstIsRussian) {
+            WordActions.createWord(this.state.translation, this.state.inputWord);
+        } else {
+            WordActions.createWord(this.state.inputWord, this.state.translation);
+        }
+
         this.setState({showNewWordInput: false, translation: ""});
-        WordActions.createWord(this.state.inputWord, this.state.translation);
+    }
+
+    isRussian(word) {
+        return /[А-Яа-я]/.test(word);
     }
 
     testWord(word, inputtedWord) {
@@ -95,7 +111,7 @@ export default class Content extends React.Component {
 
     translationInputFocused() {
         if (OnlineTranslationStore.getWord() != this.state.inputWord) {
-            WordActions.translate(this.state.inputWord, "en-ru");
+            WordActions.translate(this.state.inputWord, this.isRussian(this.state.inputWord) ? "ru-en" : "en-ru");
         } else if (this.translation.trim() == '') {
             this.setState({translationTooltipVisible: true})
         }

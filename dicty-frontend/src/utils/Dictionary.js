@@ -14,6 +14,10 @@ class Dictionary {
         return Ajax.post(serverUrl + "/create", word);
     }
 
+    getDefinition(word){
+        return Ajax.get("http://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=" + word);
+    }
+
 }
 
 export default new Dictionary();
