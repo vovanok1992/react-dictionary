@@ -28,6 +28,7 @@
     "webpack-dev-server": "latest"
   },
   "dependencies": {
+    "axios": "^0.15.2",
     "bootstrap-css-only": "^3.3.6",
     "flux": "^3.1.0",
     "react": "15.x",

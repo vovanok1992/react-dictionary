@@ -1,7 +1,7 @@
 /**
  * Created by Vovan on 18.11.2016.
  */
-import Ajax from './Ajax'
+import axios from 'axios'
 
 class Translator {
 
@@ -14,7 +14,7 @@ class Translator {
             "text=" + word + "&amp;" +
             "lang=" + lang;
 
-        return Ajax.get(url);
+        return axios.get(url);
     }
 
 }

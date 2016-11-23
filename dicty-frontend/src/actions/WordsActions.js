@@ -19,8 +19,8 @@ export function loadDefinition(word) {
     dispatcher.dispatch({type: "LOADING", enabled: true});
     dictionary.getDefinition(word)
         .then((info)=> {
-            console.log(JSON.parse(info));
-            dispatcher.dispatch({type: "RECEIVE_DEFINITION", word: word, info: JSON.parse(info).results});
+            console.log(info);
+            dispatcher.dispatch({type: "RECEIVE_DEFINITION", word: word, info: info.data.results});
             dispatcher.dispatch({type: "LOADING", enabled: false});
         });
 }
@@ -31,7 +31,7 @@ export function clearDefinition() {
 
 export function translate(word, lang) {
     translator.translate(word, lang).then((res)=> {
-        dispatcher.dispatch({type: "RECEIVE_TRANSLATION", word: word, translation: JSON.parse(res).text.join("; ")});
+        dispatcher.dispatch({type: "RECEIVE_TRANSLATION", word: word, translation: res.data.text.join("; ")});
     });
 }
 

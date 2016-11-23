@@ -2,20 +2,20 @@
  * Created by Vovan on 13.11.2016.
  */
 
-import Ajax from './Ajax'
+import axios from 'axios'
 
 class Dictionary {
 
     getAllWords(serverUrl){
-        return Ajax.get(serverUrl + "/db");
+        return axios.get(serverUrl + "/db");
     }
 
     saveWord(serverUrl, word){
-        return Ajax.post(serverUrl + "/create", word);
+        return axios.post(serverUrl + "/create", word);
     }
 
     getDefinition(word){
-        return Ajax.get("http://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=" + word);
+        return axios.get("http://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=" + word);
     }
 
 }
