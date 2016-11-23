@@ -5,9 +5,19 @@
 import React from 'react';
 
 export default class LoadingOverlay extends React.Component {
+
     render() {
+    	let classes = "loadingContainer"; 
+	    if(this.props.enabled){
+		    classes += " enabled";
+		}
+
+	    if(this.props.stick){
+			classes += " stick";
+	     }
+
         return (
-            <div className={this.props.enabled ? 'loadingContainer enabled' : 'loadingContainer'}>
+            <div className={classes}>
                 <div className="bar"></div>
             </div>
         );

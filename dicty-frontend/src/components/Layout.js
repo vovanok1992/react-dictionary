@@ -22,7 +22,8 @@ export default class Layout extends React.Component {
             word: "",
             loading: ApplicationStateStore.isLoading(),
             wordInfo: [],
-            showModalW: false
+            showModalW: false,
+            headerScrolled: false
         };
     }
 
@@ -41,6 +42,21 @@ export default class Layout extends React.Component {
                selectedWord: DefinitionStore.getWord()
            });
         });
+
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
+
+    handleScroll(e){
+        var scrolledHeight = document.documentElement.scrollTop || document.body.scrollTop;
+        if(scrolledHeight > 50 && !this.state.headerScrolled){
+            this.setState({headerScrolled: true});
+        } else if(scrolledHeight <= 50 && this.state.headerScrolled){
+            this.setState({headerScrolled: false});
+        }
     }
 
     handleWordUpdated(word) {
@@ -77,7 +93,7 @@ export default class Layout extends React.Component {
                     </Modal.Footer>
                 </Modal>
 
-                <LoadingOverlay enabled={this.state.loading}/>
+                <LoadingOverlay enabled={this.state.loading} stick={this.state.headerScrolled}/>
             </div>
 
         );
