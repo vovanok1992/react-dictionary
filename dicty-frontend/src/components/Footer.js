@@ -5,7 +5,7 @@ export default class Footer extends React.Component {
         return (
             <footer className="footer">
                 <div className="container">
-                    <p className="text-muted">This is just a footer</p>
+                    <p className="text-muted">I'm a reflection of the community.</p>
                 </div>
             </footer>
         );

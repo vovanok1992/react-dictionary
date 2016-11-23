@@ -6,13 +6,22 @@ import dispatcher from '../dispatcher';
 
 import translator from '../utils/Translator'
 import dictionary from '../utils/Dictionary'
+import localStorageWordsService from  '../utils/LocalStorageWordsService'
+
+window.localStorageWordsService = localStorageWordsService;
 
 export function createWord(en, ru) {
+    localStorageWordsService.saveWord({
+        id: Date.now(),
+        en: en,
+        ru: ru
+    });
+
     dispatcher.dispatch({
         type: "CREATE_WORD",
         en: en,
         ru: ru
-    })
+    });
 }
 
 export function loadDefinition(word) {
@@ -38,59 +47,141 @@ export function translate(word, lang) {
 export function loadWords() {
     dispatcher.dispatch({type: "LOADING", enabled: true});
     setTimeout(() => {
+        var wordsArray = [
+            {
+                id: 1,
+                en: "Keen on",
+                ru: "Увлечен"
+            },
+            {
+                id: 2,
+                en: "Acquaintance",
+                ru: "Знакомство"
+            },
+            {
+                id: 3,
+                en: "Poultry",
+                ru: "Домашняя птица"
+            },
+            {
+                id: 4,
+                en: "Domestic",
+                ru: "Внутренний"
+            },
+            {
+                id: 5,
+                en: "Give a hand",
+                ru: "Помочь"
+            },
+            {
+                id: 6,
+                en: "Men",
+                ru: "Люди"
+            },
+            {
+                id: 7,
+                en: "Leisure",
+                ru: "Свободное время"
+            },
+            {
+                id: 8,
+                en: "Tend to",
+                ru: "Как правило"
+            },
+            {
+                id: 9,
+                en: "Lend",
+                ru: "Давать взаймы"
+            },
+            {
+                id: 10,
+                en: "Sightseeing",
+                ru: "Осмотр достопримечательностей"
+            },
+            {
+                id: 11,
+                en: "Kind-hearted",
+                ru: "Добрый"
+            },
+            {
+                id: 12,
+                en: "Sulky",
+                ru: "Угрюмый"
+            },
+            {
+                id: 13,
+                en: "Dependable",
+                ru: "Надежный"
+            },
+            {
+                id: 14,
+                en: "Encouraging",
+                ru: "Обнадеживающий"
+            },
+            {
+                id: 15,
+                en: "Mean",
+                ru: "Скупой"
+            },
+            {
+                id: 16,
+                en: "Upbeat",
+                ru: "оптимистичный"
+            },
+            {
+                id: 17,
+                en: "Generous",
+                ru: "Щедрый"
+            },
+            {
+                id: 18,
+                en: "Selfish",
+                ru: "Эгоистичный"
+            },
+            {
+                id: 19,
+                en: "Pleasant",
+                ru: "Приятный"
+            },
+            {
+                id: 20,
+                en: "Beg",
+                ru: "Просить"
+            },
+            {
+                id: 21,
+                en: "bummy",
+                ru: "стрёмный"
+            },
+            {
+                id: 22,
+                en: "penitentiary",
+                ru: "каторжная тюрьма"
+            },
+            {
+                id: 23,
+                en: "Beg",
+                ru: "Просить"
+            },
+            {
+                id: 24,
+                en: "steady",
+                ru: "устойчивый"
+            },
+            {
+                id: 25,
+                en: "desperation",
+                ru: "отчаяние"
+            },
+            {
+                id: 26,
+                en: "chump",
+                ru: "болван"
+            }
+        ];
+
         dispatcher.dispatch({
-            type: "REFRESH_WORDS", words: [
-                {
-                    id: 1,
-                    en: "keen on",
-                    ru: "увлечен"
-                },
-                {
-                    id: 2,
-                    en: "acquaintance",
-                    ru: "знакомство"
-                },
-                {
-                    id: 3,
-                    en: "poultry",
-                    ru: "домашняя птица"
-                },
-                {
-                    id: 4,
-                    en: "domestic",
-                    ru: "внутренний"
-                },
-                {
-                    id: 5,
-                    en: "give a hand",
-                    ru: "помочь"
-                },
-                {
-                    id: 6,
-                    en: "men",
-                    ru: "люди"
-                },
-                {
-                    id: 7,
-                    en: "leisure",
-                    ru: "свободное время"
-                },
-                {
-                    id: 8,
-                    en: "Tend to",
-                    ru: "как правило"
-                },
-                {
-                    id: 9,
-                    en: "Lend",
-                    ru: "давать взаймы"
-                },
-                {
-                    id: 10,
-                    en: "Sightseeing",
-                    ru: "осмотр достопримечательностей"
-                }
-            ]
+            type: "REFRESH_WORDS", words: wordsArray.concat(localStorageWordsService.getWords())
         });
 
         dispatcher.dispatch({type: "LOADING", enabled: false});
