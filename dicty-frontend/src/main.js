@@ -8,8 +8,6 @@ import dictionary from './utils/Dictionary';
 
 console.log('Start application... ');
 
-window.dict = dictionary;
-
 ReactDOM.render(
     <Layout />, document.getElementById("app")
 );

@@ -30,9 +30,7 @@ class OnlineTranslationStore extends EventEmitter  {
                 break;
             }
         }
-
     }
-
 }
 
 const onlineTranslationStore = new OnlineTranslationStore();

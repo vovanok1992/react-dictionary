@@ -12,8 +12,6 @@ import Button from 'react-bootstrap/lib/Button'
 import ApplicationStateStore from '../stores/ApplicationStateStore'
 import DefinitionStore from '../stores/DefinitionStore'
 
-import * as WordActions from '../actions/WordsActions';
-
 export default class Layout extends React.Component {
 
     constructor() {
@@ -36,13 +34,12 @@ export default class Layout extends React.Component {
         });
 
         DefinitionStore.on("change", () => {
-           this.setState({
-               wordInfo: DefinitionStore.getDefinitions(),
-               showModalW: DefinitionStore.isDialogVisible(),
-               selectedWord: DefinitionStore.getWord()
-           });
+            this.setState({
+                wordInfo: DefinitionStore.getDefinitions(),
+                showModalW: true,
+                selectedWord: DefinitionStore.getWord()
+            });
         });
-
         window.addEventListener('scroll', this.handleScroll.bind(this));
     }
 
@@ -50,11 +47,11 @@ export default class Layout extends React.Component {
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
 
-    handleScroll(e){
+    handleScroll(e) {
         var scrolledHeight = document.documentElement.scrollTop || document.body.scrollTop;
-        if(scrolledHeight > 50 && !this.state.headerScrolled){
+        if (scrolledHeight > 50 && !this.state.headerScrolled) {
             this.setState({headerScrolled: true});
-        } else if(scrolledHeight <= 50 && this.state.headerScrolled){
+        } else if (scrolledHeight <= 50 && this.state.headerScrolled) {
             this.setState({headerScrolled: false});
         }
     }
@@ -66,15 +63,10 @@ export default class Layout extends React.Component {
     }
 
     close() {
-        WordActions.clearDefinition();
-    }
-
-    open() {
-        this.setState({showModalW: true});
+        this.setState({showModalW: false})
     }
 
     render() {
-
         return (
             <div className="pageBody">
                 <Header/>
@@ -95,7 +87,6 @@ export default class Layout extends React.Component {
 
                 <LoadingOverlay enabled={this.state.loading} stick={this.state.headerScrolled}/>
             </div>
-
         );
     }
 }

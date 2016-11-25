@@ -39,9 +39,7 @@ class WordsStore extends EventEmitter  {
                 break;
             }
         }
-
     }
-
 }
 
 const wordStore = new WordsStore();

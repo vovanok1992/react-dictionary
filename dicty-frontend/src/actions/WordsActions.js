@@ -8,8 +8,6 @@ import translator from '../utils/Translator'
 import dictionary from '../utils/Dictionary'
 import localStorageWordsService from  '../utils/LocalStorageWordsService'
 
-window.localStorageWordsService = localStorageWordsService;
-
 export function createWord(en, ru) {
     localStorageWordsService.saveWord({
         id: Date.now(),
@@ -32,10 +30,6 @@ export function loadDefinition(word) {
             dispatcher.dispatch({type: "RECEIVE_DEFINITION", word: word, info: info.data.results});
             dispatcher.dispatch({type: "LOADING", enabled: false});
         });
-}
-
-export function clearDefinition() {
-    dispatcher.dispatch({type: "CLEAN_DEFINITION"});
 }
 
 export function translate(word, lang) {
@@ -177,6 +171,36 @@ export function loadWords() {
                 id: 26,
                 en: "chump",
                 ru: "болван"
+            },
+            {
+                id: 27,
+                en: "tell off",
+                ru: "отчитать"
+            },
+            {
+                id: 28,
+                en: "take after",
+                ru: "походить на"
+            },
+            {
+                id: 29,
+                en: "look up to",
+                ru: "уважать"
+            },
+            {
+                id: 30,
+                en: "carry on",
+                ru: "продолжать"
+            },
+            {
+                id: 31,
+                en: "bring up",
+                ru: "воспитывать"
+            },
+            {
+                id: 32,
+                en: "revise",
+                ru: "пересматривать"
             }
         ];
 
