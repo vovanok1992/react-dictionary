@@ -7,6 +7,7 @@ import WordStringUtils from '../utils/WordStringUtils'
 
 import OnlineTranslationStore from '../stores/OnlineTranslationStore'
 
+import classNames from 'classnames';
 
 export default class InputBox extends React.Component {
 
@@ -63,11 +64,17 @@ export default class InputBox extends React.Component {
     }
 
     render() {
-        var showNewWordInput = this.props.showNewWordInput || this.state.showNewWordInput;
-        const saveWord = "wordSearch newWord" + (showNewWordInput ? " visible" : "");
-        const newWord = "inputWordBtn" + (this.props.showNewWordBtn && !showNewWordInput ? " visible" : "");
-        const newWordIcon = "glyphicon" + (this.state.inputWord.length > 0 ? " glyphicon-remove-sign removeIcon" : " glyphicon-search");
-        const translationTooltip = "translationTooltip" + (this.state.translationTooltipVisible ? " visible" : "");
+        const showNewWordInput = this.props.showNewWordInput || this.state.showNewWordInput;
+        const isWordEmpty = this.state.inputWord.length > 0;
+
+        const saveWordClassNames = classNames("wordSearch", "newWord", {"visible": showNewWordInput});
+        const translationTooltipClassNames = classNames("translationTooltip", {"visible": this.state.translationTooltipVisible});
+        const newWordClassNames = classNames("inputWordBtn", {"visible": this.props.showNewWordBtn && !showNewWordInput});
+
+        const newWordIconClassNames = classNames("glyphicon", {
+            "glyphicon-remove-sign removeIcon": isWordEmpty,
+            "glyphicon-search": !isWordEmpty
+        });
 
         return (
             <div>
@@ -77,15 +84,13 @@ export default class InputBox extends React.Component {
                            value={this.state.inputWord}
                            className="wordInput"
                            placeholder="Input your word..."/>
-                    <span onClick={(e)=> {this.handleChangeWord("")}}
-                          className={newWordIcon}/>
-                    <Button className={newWord}
-                            onClick={()=> {
-                                this.setState({showNewWordBtn: false, showNewWordInput: true})
-                            }}>New</Button>
+                    <span onClick={()=> {this.handleChangeWord("")}}
+                          className={newWordIconClassNames}/>
+                    <Button className={newWordClassNames}
+                            onClick={()=> {this.setState({showNewWordBtn: false, showNewWordInput: true})}}>New</Button>
                 </div>
 
-                <div className={saveWord}>
+                <div className={saveWordClassNames}>
                     <input type="text"
                            className="wordInput"
                            onChange={this.handleChangeTranslation.bind(this)}
@@ -101,7 +106,7 @@ export default class InputBox extends React.Component {
                         this.handleChangeWord("");
                     }} className="saveWord">Save</Button>
 
-                    <div className={translationTooltip}>
+                    <div className={translationTooltipClassNames}>
                         <div className="in tooltip bottom" onClick={this.tooltipClicked.bind(this)}>
                             <div className="tooltip-arrow"></div>
                             <div className="tooltip-inner">{this.state.lastTranslation}</div>

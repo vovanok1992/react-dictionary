@@ -30,6 +30,7 @@
   "dependencies": {
     "axios": "^0.15.2",
     "bootstrap-css-only": "^3.3.6",
+    "classnames": "^2.2.5",
     "es6-promise": "^4.0.5",
     "flux": "^3.1.0",
     "react": "15.x",

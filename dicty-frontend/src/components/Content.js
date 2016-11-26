@@ -54,7 +54,7 @@ export default class Content extends React.Component {
             return;
         }
 
-        var firstIsRussian = WordStringUtils.isRussian(word);
+        let firstIsRussian = WordStringUtils.isRussian(word);
         if (firstIsRussian && WordStringUtils.isRussian(trans)) {
             alert("You have cyryllic symbols in both input fields. Can not determine how to save this.");
             return;
