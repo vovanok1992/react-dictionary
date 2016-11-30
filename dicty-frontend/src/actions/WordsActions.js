@@ -201,6 +201,121 @@ export function loadWords() {
                 id: 32,
                 en: "revise",
                 ru: "пересматривать"
+            },
+            {
+                id: 33,
+                en: "envelope",
+                ru: "конверт"
+            },
+            {
+                id: 34,
+                en: "bulldog clip",
+                ru: "зажим для бумаги"
+            },
+            {
+                id: 35,
+                en: "ring binder",
+                ru: "папка с кольцом"
+            },
+            {
+                id: 36,
+                en: "pencil sharpener",
+                ru: "точилка"
+            },
+            {
+                id: 37,
+                en: "clipboard",
+                ru: "дощечка с зажимом"
+            },
+            {
+                id: 38,
+                en: "post-it note",
+                ru: "бумага для заметок"
+            },
+            {
+                id: 39,
+                en: "clam",
+                ru: "моллюск"
+            },
+            {
+                id: 40,
+                en: "shrimp",
+                ru: "креветка"
+            },
+            {
+                id: 41,
+                en: "mussel",
+                ru: "мидия"
+            },
+            {
+                id: 42,
+                en: "pike",
+                ru: "щука"
+            },
+            {
+                id: 43,
+                en: "catfish",
+                ru: "сом"
+            },
+            {
+                id: 44,
+                en: "cod",
+                ru: "треска"
+            },
+            {
+                id: 45,
+                en: "perch",
+                ru: "окунь"
+            },
+            {
+                id: 46,
+                en: "crucian",
+                ru: "карась"
+            },
+            {
+                id: 47,
+                en: "ray",
+                ru: "скат"
+            },
+            {
+                id: 48,
+                en: "eel",
+                ru: "угорь"
+            },
+            {
+                id: 49,
+                en: "spatula",
+                ru: "лопаточка"
+            },
+            {
+                id: 50,
+                en: "whisk",
+                ru: "сбивалка"
+            },
+            {
+                id: 51,
+                en: "chopsticks",
+                ru: "палочки для еды"
+            },
+            {
+                id: 52,
+                en: "mug",
+                ru: "кружка"
+            },
+            {
+                id: 53,
+                en: "fork",
+                ru: "вилка"
+            },
+            {
+                id: 54,
+                en: "pot",
+                ru: "горшок/кастрюля"
+            },
+            {
+                id: 55,
+                en: "pan",
+                ru: "кастрюля"
             }
         ];
 
