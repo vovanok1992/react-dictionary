@@ -51,11 +51,11 @@ export default class WordsTable extends React.Component {
                              translation={word.ru}
                 />
             });
-            res.push(<WordsGroup header={key} key={key} wordsElements={words}/>)
+            res.push(<WordsGroup header={key} key={key} index={res.length} wordsElements={words}/>)
         }
 
         return (
-            <div>
+            <div className="wordsTableContainer">
                 {res}
             </div>
         );

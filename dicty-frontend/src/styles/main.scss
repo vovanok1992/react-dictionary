@@ -189,15 +189,36 @@ html {
 
 /* --- words groups --- */
 
+.wordsTableContainer{
+  margin-bottom: 20px;
+  box-shadow: 0 0 22px rgba(0,0,0,0.4);
+}
+
 .group{
-  background: linear-gradient(to top, transparent, aliceblue);
   border-radius: 1px;
   overflow: hidden;
-  border: 1px solid cornflowerblue;
 }
 
 .group-header{
   padding: 0 5px;
   color:white;
+}
+
+.group.odd {
+  background: linear-gradient(to top, transparent, aliceblue);
+  border: 1px solid cornflowerblue;
+}
+
+.group.odd > .group-header {
   background: cornflowerblue;
 }
+
+.group.even {
+  background: linear-gradient(to top, transparent, #feffc9);
+  border: 1px solid darkorange;
+}
+
+.group.even > .group-header {
+  background: darkorange;
+}
+

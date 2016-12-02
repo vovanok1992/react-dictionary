@@ -365,6 +365,42 @@ export function loadWords() {
                 en: "pan",
                 ru: "кастрюля",
                 date: "29.11.2016"
+            },
+            {
+                id: 56,
+                en: "Mend",
+                ru: "чинить",
+                date: "01.12.2016"
+            },
+            {
+                id: 57,
+                en: "overlook",
+                ru: "игнорировать",
+                date: "01.12.2016"
+            },
+            {
+                id: 58,
+                en: "Refugee",
+                ru: "беженец",
+                date: "01.12.2016"
+            },
+            {
+                id: 59,
+                en: "hold up",
+                ru: "задержать",
+                date: "01.12.2016"
+            },
+            {
+                id: 60,
+                en: "desperate",
+                ru: "отчаянный",
+                date: "01.12.2016"
+            },
+            {
+                id: 61,
+                en: "nail",
+                ru: "гвоздь",
+                date: "01.12.2016"
             }
         ];
 
