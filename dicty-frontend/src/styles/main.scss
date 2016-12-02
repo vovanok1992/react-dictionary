@@ -197,11 +197,13 @@ html {
 .group{
   border-radius: 1px;
   overflow: hidden;
+  transition:1s;
 }
 
 .group-header{
   padding: 0 5px;
   color:white;
+  cursor:pointer;
 }
 
 .group.odd {
@@ -222,3 +224,10 @@ html {
   background: darkorange;
 }
 
+.group.closed > .wordGroupContent{
+  max-height: 0;
+}
+
+.group.closed {
+  opacity: 0.5;
+}
