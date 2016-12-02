@@ -2,8 +2,6 @@
  * Created by Vovan on 26.11.2016.
  */
 import React from 'react';
-import Table from 'react-bootstrap/lib/Table';
-import * as WordActions from '../actions/WordsActions';
 
 export default class Word extends React.Component {
 
