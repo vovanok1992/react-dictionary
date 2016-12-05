@@ -56,9 +56,6 @@ public class IndexController {
             return "error";
         }
 
-        //Word word = new Word();
-        //word.setWord("Hello");
-        //word.setTranslations(new String[]{"Привет","Здравствуй"});
         word.setLang("en-ru");
 
         database.save(word);

@@ -10,22 +10,43 @@ import WordsGroup from './WordsGroup'
 
 export default class WordsTable extends React.Component {
 
-    groupWordsByDate(words) {
-        const res = [];
+    shouldComponentUpdate(nextProps, nextState){
+        return this.props.words != nextProps.words;
+    }
 
-        for (let i = 0; i < words.length; i++) {
-            const word = words[i];
-            if(word.date == undefined){
+    groupWordsByDate(words) {
+        console.log("Recalc")
+        const res = {};
+        words.forEach((word) => {
+            if(!word.date){
                 word.date = "LOCAL_STORAGE";
             }
 
-            if (res[word.date] == undefined) {
+            if (!res[word.date]) {
                 res[word.date] = [];
             }
             res[word.date].push(word);
-        }
-
+        });
         return res;
+    }
+
+    makeWord(word){
+        return <Word key={word.id}
+                     onClick={() => {
+                         WordActions.loadDefinition(word.en)
+                     }}
+                     word={word.en}
+                     translation={word.ru}
+        />
+    }
+
+    makeGroups(groups){
+        return Object.keys(groups).map((key, index) => {
+            const words = groups[key].map((word) => {
+                return this.makeWord(word)
+            });
+            return <WordsGroup header={key} key={key} index={index} wordsElements={words}/>
+        });
     }
 
     render() {
@@ -34,25 +55,7 @@ export default class WordsTable extends React.Component {
         }
 
         const groups = this.groupWordsByDate(this.props.words);
-        const res = [];
-
-        for (const key in groups) {
-            if(!groups.hasOwnProperty(key)){
-                continue;
-            }
-
-            const group = groups[key];
-            const words = group.map((word) => {
-                return <Word key={word.id}
-                             onClick={() => {
-                                 WordActions.loadDefinition(word.en)
-                             }}
-                             word={word.en}
-                             translation={word.ru}
-                />
-            });
-            res.push(<WordsGroup header={key} key={key} index={res.length} wordsElements={words}/>)
-        }
+        const res = this.makeGroups(groups);
 
         return (
             <div className="wordsTableContainer">
