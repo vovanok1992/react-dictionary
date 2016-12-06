@@ -1,8 +1,7 @@
 /**
  * Created by Vovan on 13.11.2016.
  */
-
-import axios from 'axios'
+import axios from "axios";
 
 class Dictionary {
 

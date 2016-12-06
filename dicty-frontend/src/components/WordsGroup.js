@@ -1,7 +1,7 @@
 /**
  * Created by Vovan on 26.11.2016.
  */
-import React from 'react';
+import React from "react";
 
 export default class WordsGroup extends React.Component {
 
@@ -11,7 +11,6 @@ export default class WordsGroup extends React.Component {
     }
 
     headerClicked(){
-        console.log("Clicked")
         this.setState({closed: !this.state.closed});
     }
 

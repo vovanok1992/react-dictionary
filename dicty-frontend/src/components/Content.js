@@ -1,13 +1,11 @@
-import React from 'react';
-import WordsTable from './WordsTable';
-
-import InputBox from './InputBox'
-
-import * as WordActions from '../actions/WordsActions';
-
-import WordsStore from '../stores/WordsStore'
-
-import WordStringUtils from '../utils/WordStringUtils'
+import React from "react";
+import WordsTable from "./WordsTable";
+import WordDefinitionModal from "./WordDefinitionModal";
+import InputBox from "./InputBox";
+import * as WordActions from "../actions/WordsActions";
+import WordsStore from "../stores/WordsStore";
+import DefinitionStore from "../stores/DefinitionStore";
+import WordStringUtils from "../utils/WordStringUtils";
 
 
 export default class Content extends React.Component {
@@ -17,9 +15,11 @@ export default class Content extends React.Component {
         this.state = {
             words: WordsStore.getWords(),
             showNewWordBtn: false,
-            showNewWordInput: false
+            showNewWordInput: false,
+            wordInfo: [],
+            showModalW: false
         };
-        this.word = '';
+        this.word = "";
         this.filteredWords = [];
     }
 
@@ -31,14 +31,21 @@ export default class Content extends React.Component {
             });
             this.handleChangeWord(this.word);
         });
+
+        DefinitionStore.on("change", () => {
+            this.setState({
+                wordInfo: DefinitionStore.getDefinitions(),
+                showModalW: true,
+                selectedWord: DefinitionStore.getWord()
+            });
+        });
     }
 
     handleChangeWord(word) {
         this.word = word;
         this.updateFilteredWords(word);
-        this.setState({showNewWordBtn: (word.trim() != '' && this.filteredWords.length != 0)});
-        this.setState({showNewWordInput: (word.trim() != '' && this.filteredWords.length == 0)});
-        this.props.wordUpdated(word);
+        this.setState({showNewWordBtn: (word.trim() !== "" && this.filteredWords.length !== 0)});
+        this.setState({showNewWordInput: (word.trim() !== "" && this.filteredWords.length === 0)});
     }
 
     updateFilteredWords(inputtedWord) {
@@ -49,14 +56,14 @@ export default class Content extends React.Component {
     }
 
     createWord(word, trans) {
-        if (trans.trim() == '') {
+        if (trans.trim() === "") {
             alert("Please enter some text to translation");
             return;
         }
 
-        let firstIsRussian = WordStringUtils.isRussian(word);
+        const firstIsRussian = WordStringUtils.isRussian(word);
         if (firstIsRussian && WordStringUtils.isRussian(trans)) {
-            alert("You have cyryllic symbols in both input fields. Can not determine how to save this.");
+            alert("You have cyrillic symbols in both input fields. Can not determine how to save this.");
             return;
         }
 
@@ -77,6 +84,11 @@ export default class Content extends React.Component {
                 />
 
                 <WordsTable words={this.filteredWords}/>
+
+                <WordDefinitionModal show={this.state.showModalW}
+                                     selectedWord={this.state.selectedWord}
+                                     wordInfo={this.state.wordInfo}
+                                     closeHandler={()=>{this.setState({showModalW: false})}}/>
             </div>
         );
     }

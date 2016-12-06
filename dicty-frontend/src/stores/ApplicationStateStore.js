@@ -1,9 +1,8 @@
 /**
  * Created by Vovan on 16.11.2016.
  */
-
-import { EventEmitter } from "events";
-import dispatcher from '../dispatcher'
+import {EventEmitter} from "events";
+import dispatcher from "../dispatcher";
 
 class ApplicationStateStore extends EventEmitter  {
 
@@ -24,9 +23,7 @@ class ApplicationStateStore extends EventEmitter  {
                 break;
             }
         }
-
     }
-
 }
 
 const applicationStateStore = new ApplicationStateStore();

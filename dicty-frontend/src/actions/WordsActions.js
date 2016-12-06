@@ -1,12 +1,10 @@
 /**
  * Created by Vovan on 12.11.2016.
  */
-
-import dispatcher from '../dispatcher';
-
-import translator from '../utils/Translator'
-import dictionary from '../utils/Dictionary'
-import localStorageWordsService from  '../utils/LocalStorageWordsService'
+import dispatcher from "../dispatcher";
+import translator from "../utils/Translator";
+import dictionary from "../utils/Dictionary";
+import localStorageWordsService from "../utils/LocalStorageWordsService";
 
 export function createWord(en, ru) {
     localStorageWordsService.saveWord({
@@ -41,7 +39,7 @@ export function translate(word, lang) {
 export function loadWords() {
     dispatcher.dispatch({type: "LOADING", enabled: true});
     setTimeout(() => {
-        var wordsArray = [
+        const wordsArray = [
             {
                 id: 1,
                 en: "Keen on",

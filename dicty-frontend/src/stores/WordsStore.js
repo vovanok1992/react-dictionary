@@ -1,9 +1,8 @@
 /**
  * Created by Vovan on 11.11.2016.
  */
-
-import { EventEmitter } from "events";
-import dispatcher from '../dispatcher'
+import {EventEmitter} from "events";
+import dispatcher from "../dispatcher";
 
 class WordsStore extends EventEmitter  {
 

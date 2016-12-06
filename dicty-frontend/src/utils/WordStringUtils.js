@@ -9,8 +9,8 @@ export default class WordStringUtils {
     }
 
     static testWord(word, inputtedWord) {
-        if (typeof inputtedWord == 'undefined') {
-            inputtedWord = '';
+        if (typeof inputtedWord == "undefined") {
+            inputtedWord = "";
         }
         return word.toLowerCase().indexOf(inputtedWord.trim().toLowerCase()) != -1;
     }

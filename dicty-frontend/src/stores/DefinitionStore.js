@@ -1,16 +1,15 @@
 /**
  * Created by Vovan on 16.11.2016.
  */
-
 import {EventEmitter} from "events";
-import dispatcher from '../dispatcher'
+import dispatcher from "../dispatcher";
 
 class DefinitionStore extends EventEmitter {
 
     constructor() {
         super();
         this.info = [];
-        this.word = '';
+        this.word = "";
     }
 
     getDefinitions() {
@@ -25,15 +24,13 @@ class DefinitionStore extends EventEmitter {
         switch (action.type) {
             case "RECEIVE_DEFINITION" : {
                 this.info = action.info;
-                this.dialogVisible = true;
                 this.word = action.word;
                 this.emit("change");
                 break;
             }
 
             case "CLEAN_DEFINITION" : {
-                this.dialogVisible = false;
-                this.word = '';
+                this.word = "";
                 this.emit("change");
                 break;
             }

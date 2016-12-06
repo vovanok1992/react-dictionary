@@ -1,12 +1,10 @@
 /**
  * Created by Vovan on 13.11.2016.
  */
-import React from 'react';
-
-import * as WordActions from '../actions/WordsActions';
-
-import Word from './Word'
-import WordsGroup from './WordsGroup'
+import React from "react";
+import * as WordActions from "../actions/WordsActions";
+import Word from "./Word";
+import WordsGroup from "./WordsGroup";
 
 export default class WordsTable extends React.Component {
 
@@ -15,7 +13,6 @@ export default class WordsTable extends React.Component {
     }
 
     groupWordsByDate(words) {
-        console.log("Recalc")
         const res = {};
         words.forEach((word) => {
             if(!word.date){
@@ -33,7 +30,7 @@ export default class WordsTable extends React.Component {
     makeWord(word){
         return <Word key={word.id}
                      onClick={() => {
-                         WordActions.loadDefinition(word.en)
+                         WordActions.loadDefinition(word.en);
                      }}
                      word={word.en}
                      translation={word.ru}
@@ -43,7 +40,7 @@ export default class WordsTable extends React.Component {
     makeGroups(groups){
         return Object.keys(groups).map((key, index) => {
             const words = groups[key].map((word) => {
-                return this.makeWord(word)
+                return this.makeWord(word);
             });
             return <WordsGroup header={key} key={key} index={index} wordsElements={words}/>
         });

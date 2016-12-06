@@ -1,13 +1,9 @@
-import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-
-import * as WordActions from '../actions/WordsActions';
-
-import WordStringUtils from '../utils/WordStringUtils'
-
-import OnlineTranslationStore from '../stores/OnlineTranslationStore'
-
-import classNames from 'classnames';
+import React from "react";
+import Button from "react-bootstrap/lib/Button";
+import * as WordActions from "../actions/WordsActions";
+import WordStringUtils from "../utils/WordStringUtils";
+import OnlineTranslationStore from "../stores/OnlineTranslationStore";
+import classNames from "classnames";
 
 export default class InputBox extends React.Component {
 
@@ -54,13 +50,13 @@ export default class InputBox extends React.Component {
         if (OnlineTranslationStore.getWord() != this.state.inputWord) {
             WordActions.translate(this.state.inputWord, WordStringUtils.isRussian(this.state.inputWord) ? "ru-en" : "en-ru");
         } else if (typeof this.translation != 'undefined' && this.translation.trim() == '') {
-            this.setState({translationTooltipVisible: true})
+            this.setState({translationTooltipVisible: true});
         }
     }
 
     tooltipClicked() {
         this.translation = OnlineTranslationStore.getTranslation();
-        this.setState({translation: OnlineTranslationStore.getTranslation()})
+        this.setState({translation: OnlineTranslationStore.getTranslation()});
     }
 
     render() {

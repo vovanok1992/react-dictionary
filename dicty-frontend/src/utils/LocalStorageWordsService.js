@@ -5,7 +5,7 @@
 class LocalStorageWordsService {
     saveWord(word) {
         if (typeof localStorage["savedWords"] != 'undefined') {
-            var words = this.getWords();
+            const words = this.getWords();
             words.push(word);
             localStorage["savedWords"] = JSON.stringify(words);
         } else {

@@ -1,17 +1,12 @@
 /**
  * Created by Vovan on 26.11.2016.
  */
-import React from 'react';
+import React from "react";
 
 export default class Word extends React.Component {
 
-    open(){
-        console.log("Word clicked")
+    open() {
         this.props.onClick();
-    }
-
-    close(){
-        console.log("closed")
     }
 
     render() {

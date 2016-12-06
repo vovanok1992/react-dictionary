@@ -1,8 +1,7 @@
 /**
  * Created by Vovan on 17.11.2016.
  */
-
-import React from 'react';
+import React from "react";
 
 export default class WordInfoPanel extends React.Component {
     render() {
