@@ -11,7 +11,11 @@ export default class Header extends React.Component {
             <Navbar collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">React-Dictionary</a>
+                        <div className="logo">
+                            <img className="logoIcon" src="static/icon.png" alt=""/>
+                            <a className="logoText" href="https://github.com/vovanok1992/react-dictionary/tree/master/dicty-frontend">ReactDictionary</a>
+                        </div>
+
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>

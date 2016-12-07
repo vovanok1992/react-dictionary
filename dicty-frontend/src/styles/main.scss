@@ -13,6 +13,25 @@ html {
   margin-bottom: 60px;
 }
 
+
+/*-- LOGO ---*/
+
+.logo{
+  padding: 0 10px;
+}
+
+.logo .logoIcon{
+  display: inline-block;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.logo .logoText{
+  font-style: italic;
+}
+
+/*-- FOOTER ---*/
+
 .footer {
   position: absolute;
   bottom: 0;
