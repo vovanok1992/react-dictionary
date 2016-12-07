@@ -1,10 +1,22 @@
 var webpack = require('webpack');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var minimize = process.argv.indexOf('--minimize') !== -1;
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
+var path = require('path');
 
 var pluginsArray = [
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({url: 'http://localhost:8081'})
+    new OpenBrowserPlugin({url: 'http://localhost:8081'}),
+    new CleanWebpackPlugin(['dist'], {
+        root: path.resolve(__dirname),
+        verbose: true,
+        dry: false,
+    }),
+    new CopyWebpackPlugin([
+        { from: 'static', to: 'static'},
+        { from: 'index_prod.html', to: 'index.html'}
+    ])
 ];
 
 if (minimize) {

@@ -60,6 +60,4 @@ export default class WordsTable extends React.Component {
             </div>
         );
     }
-
-
 }
