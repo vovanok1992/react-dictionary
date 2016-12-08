@@ -56,11 +56,11 @@ html {
   padding-right: 65px;
   border-bottom: 1px solid $lightGrey;
   transition: 1s;
-}
 
-.wordInput:focus {
-  outline: none;
-  border-bottom: 1px solid grey;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid grey;
+  }
 }
 
 .wordSearch {
@@ -152,10 +152,10 @@ html {
   cursor: pointer;
   color: red !important;
   transition: 1s;
-}
 
-.removeIcon:hover {
-  transform: scale(1.3);
+  &:hover {
+    transform: scale(1.3);
+  }
 }
 
 .translationTooltip {
@@ -186,10 +186,10 @@ html {
   border-bottom: 1px solid $lightGrey;
   padding: 4px 10px;
   font-size: 16px;
-}
 
-.wordContainer:hover {
-  background-color: $lightGrey;
+  &:hover {
+    background-color: $lightGrey;
+  }
 }
 
 .wordWithTranslation > div {
