@@ -13,21 +13,19 @@ html {
   margin-bottom: 60px;
 }
 
-
 /*-- LOGO ---*/
-
-.logo{
+.logo {
   padding: 0 10px;
-}
 
-.logo .logoIcon{
-  display: inline-block;
-  height: 50px;
-  margin-right: 10px;
-}
+  .logoIcon {
+    display: inline-block;
+    height: 50px;
+    margin-right: 10px;
+  }
 
-.logo .logoText{
-  font-style: italic;
+  .logoText {
+    font-style: italic;
+  }
 }
 
 /*-- FOOTER ---*/
@@ -44,10 +42,10 @@ html {
   width: auto;
   max-width: 680px;
   padding: 0 15px;
-}
 
-.container .text-muted {
-  margin: 20px 0;
+  .text-muted {
+    margin: 20px 0;
+  }
 }
 
 .wordInput {
@@ -110,8 +108,8 @@ html {
   transform: translateX(0);
 }
 
-.loadingContainer.enabled.stick{
-  top:-60px;
+.loadingContainer.enabled.stick {
+  top: -60px;
   position: fixed;
 }
 
@@ -150,18 +148,18 @@ html {
   }
 }
 
-.removeIcon{
+.removeIcon {
   cursor: pointer;
   color: red !important;
-  transition:1s;
+  transition: 1s;
 }
 
-.removeIcon:hover{
-  transform:scale(1.3);
+.removeIcon:hover {
+  transform: scale(1.3);
 }
 
-.translationTooltip{
-  width:100%;
+.translationTooltip {
+  width: 100%;
   text-align: center;
   height: 0;
   opacity: 0;
@@ -173,17 +171,16 @@ html {
   display: inline-block;
   position: relative;
   font-size: 16px;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.translationTooltip.visible{
+.translationTooltip.visible {
   transform: translateX(0);
   opacity: 1;
 }
 
 /*--- Word element----*/
-
-.wordContainer{
+.wordContainer {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid $lightGrey;
@@ -191,38 +188,37 @@ html {
   font-size: 16px;
 }
 
-
-.wordContainer:hover{
+.wordContainer:hover {
   background-color: $lightGrey;
 }
 
 .wordWithTranslation > div {
   vertical-align: top;
-  width:50%;
+  width: 50%;
   display: inline-block;
 }
 
-.wordWithTranslation > div:first-child{
+.wordWithTranslation > div:first-child {
   font-weight: bold;
 }
 
 /* --- words groups --- */
 
-.wordsTableContainer{
+.wordsTableContainer {
   margin-bottom: 20px;
-  box-shadow: 0 0 22px rgba(0,0,0,0.4);
+  box-shadow: 0 0 22px rgba(0, 0, 0, 0.4);
 }
 
-.group{
+.group {
   border-radius: 1px;
   overflow: hidden;
-  transition:1s;
+  transition: 1s;
 }
 
-.group-header{
+.group-header {
   padding: 0 5px;
-  color:white;
-  cursor:pointer;
+  color: white;
+  cursor: pointer;
 }
 
 .group.odd {
@@ -243,7 +239,7 @@ html {
   background: darkorange;
 }
 
-.group.closed > .wordGroupContent{
+.group.closed > .wordGroupContent {
   max-height: 0;
 }
 
