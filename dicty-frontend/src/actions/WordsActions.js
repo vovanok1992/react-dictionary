@@ -38,6 +38,7 @@ export function translate(word, lang) {
 }
 
 export function loadWords() {
+    console.log("LOADING WORDS")
     dispatcher.dispatch({type: "LOADING", enabled: true});
     const promise = axios.get("static/words.json");
     promise.then((res) => {

@@ -10,8 +10,8 @@ import WordStringUtils from "../utils/WordStringUtils";
 
 export default class Content extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             words: WordsStore.getWords(),
             showNewWordBtn: false,
@@ -21,24 +21,34 @@ export default class Content extends React.Component {
         };
         this.word = "";
         this.filteredWords = [];
+
+        this.wordsChanged = this.wordsChanged.bind(this);
     }
 
     componentWillMount() {
         WordActions.loadWords();
-        WordsStore.on("change", () => {
-            this.setState({
-                words: WordsStore.getWords()
-            });
-            this.handleChangeWord(this.word);
-        });
+        WordsStore.on("change", this.wordsChanged.bind(this));
+        DefinitionStore.on("change", this.definitionChanged.bind(this));
+    }
 
-        DefinitionStore.on("change", () => {
-            this.setState({
-                wordInfo: DefinitionStore.getDefinitions(),
-                showModalW: true,
-                selectedWord: DefinitionStore.getWord()
-            });
+    componentWillUnmount() {
+        WordsStore.removeListener("change", this.wordsChanged, true);
+        DefinitionStore.removeListener("change", this.definitionChanged);
+    }
+
+    definitionChanged() {
+        this.setState({
+            wordInfo: DefinitionStore.getDefinitions(),
+            showModalW: true,
+            selectedWord: DefinitionStore.getWord()
         });
+    }
+
+    wordsChanged() {
+        this.setState({
+            words: WordsStore.getWords()
+        });
+        this.handleChangeWord(this.word);
     }
 
     handleChangeWord(word) {
@@ -88,7 +98,9 @@ export default class Content extends React.Component {
                 <WordDefinitionModal show={this.state.showModalW}
                                      selectedWord={this.state.selectedWord}
                                      wordInfo={this.state.wordInfo}
-                                     closeHandler={()=>{this.setState({showModalW: false})}}/>
+                                     closeHandler={() => {
+                                         this.setState({showModalW: false})
+                                     }}/>
             </div>
         );
     }
