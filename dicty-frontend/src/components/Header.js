@@ -8,10 +8,17 @@ import MenuItem from "react-bootstrap/lib/MenuItem";
 import {hashHistory} from "react-router";
 
 export default class Header extends React.Component {
+
+    constructor(props){
+        window.whistory = hashHistory;
+        super(props);
+        this.state = {
+            mainPage: hashHistory.getCurrentLocation().pathname == "/"
+        }
+    }
+
+
     render() {
-
-        window.hashHistory = hashHistory;
-
         return (
             <Navbar collapseOnSelect>
                 <Navbar.Header>
@@ -39,12 +46,24 @@ export default class Header extends React.Component {
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
-                        <NavItem eventKey={1} href="#" onClick={()=>{hashHistory.push("learn")}}>
-                            Irregular Verbs
-                        </NavItem>
+                        {this.getSwitchButton()}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+        );
+    }
+
+    switchPage(){
+        this.setState({mainPage: !this.state.mainPage});
+        hashHistory.push(this.state.mainPage ? "learn" : "/");
+    }
+
+    getSwitchButton(){
+        return (
+            <NavItem eventKey={1} onClick={this.switchPage.bind(this)}>
+                {this.state.mainPage && "Irregular Verbs"}
+                {!this.state.mainPage && "Words Table"}
+            </NavItem>
         );
     }
 }

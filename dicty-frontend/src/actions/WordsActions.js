@@ -48,3 +48,15 @@ export function loadWords() {
         dispatcher.dispatch({type: "LOADING", enabled: false});
     });
 }
+
+export function loadIrrVerbs() {
+    console.log("LOADING loadIrrVerbs");
+    dispatcher.dispatch({type: "LOADING", enabled: true});
+    const promise = axios.get("static/irregularVerbs.json");
+    promise.then((res) => {
+        dispatcher.dispatch({
+            type: "REFRESH_IRR_VERBS", words: res.data
+        });
+        dispatcher.dispatch({type: "LOADING", enabled: false});
+    });
+}

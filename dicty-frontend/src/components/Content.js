@@ -23,12 +23,13 @@ export default class Content extends React.Component {
         this.filteredWords = [];
 
         this.wordsChanged = this.wordsChanged.bind(this);
+        this.definitionChanged = this.definitionChanged.bind(this);
     }
 
     componentWillMount() {
         WordActions.loadWords();
         WordsStore.on("change", this.wordsChanged);
-        DefinitionStore.on("change", this.definitionChanged.bind(this));
+        DefinitionStore.on("change", this.definitionChanged);
     }
 
     componentWillUnmount() {

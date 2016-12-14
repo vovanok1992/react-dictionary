@@ -16,15 +16,21 @@ export default class InputBox extends React.Component {
             translationTooltipVisible: false,
             lastTranslation: ""
         };
-    }
 
-    componentWillMount() {
-        OnlineTranslationStore.on("change", () => {
+        this.onlineWordHandler = () => {
             this.setState({
                 translationTooltipVisible: true,
                 lastTranslation: OnlineTranslationStore.getTranslation()
             });
-        });
+        }
+    }
+
+    componentWillMount() {
+        OnlineTranslationStore.on("change", this.onlineWordHandler);
+    }
+
+    componentWillUnmount(){
+        OnlineTranslationStore.removeListener("change", this.onlineWordHandler);
     }
 
     handleChangeWord(word) {
