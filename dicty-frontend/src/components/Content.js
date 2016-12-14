@@ -27,7 +27,7 @@ export default class Content extends React.Component {
 
     componentWillMount() {
         WordActions.loadWords();
-        WordsStore.on("change", this.wordsChanged.bind(this));
+        WordsStore.on("change", this.wordsChanged);
         DefinitionStore.on("change", this.definitionChanged.bind(this));
     }
 
