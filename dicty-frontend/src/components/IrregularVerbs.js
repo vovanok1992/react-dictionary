@@ -39,7 +39,7 @@ export default class IrregularVerbs extends React.Component {
 
         return (
             <div className="container">
-                <table className="table table-striped table-hover table-responsive">
+                <table className="irrWordsTable table table-striped table-hover table-responsive">
                     <thead>
                         <tr>
                             <th>Infinitive</th>

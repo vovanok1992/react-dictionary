@@ -246,3 +246,11 @@ html {
 .group.closed {
   opacity: 0.5;
 }
+
+/* --- Irregular verbs --- */
+
+@media screen and (max-width: 767px){
+  .irrWordsTable{
+    font-size: 80%;
+  }
+}
