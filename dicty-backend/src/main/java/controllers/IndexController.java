@@ -1,5 +1,8 @@
 package controllers;
 
+import beans.InsertWordsBean;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import database.DatabaseService;
 import database.entities.Word;
 import org.mongodb.morphia.Datastore;
@@ -8,12 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import utils.ClientInfoUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -37,6 +42,14 @@ public class IndexController {
         return new ModelAndView("index");
     }
 
+    @RequestMapping(value = "/dbedit", method = RequestMethod.GET)
+    public String handleDbEditRequest(HttpServletRequest request,
+                                      Model model){
+        logPageLoad("dbedit", request);
+        model.addAttribute("userForm", new InsertWordsBean());
+        return"dbinsert";
+    }
+
     @RequestMapping(value = "/db", method = RequestMethod.GET)
     @ResponseBody public List<Word> db(HttpServletRequest request) {
         logPageLoad("db", request);
@@ -47,16 +60,17 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseBody public String create(@RequestBody Word word, HttpServletRequest request) {
+    @ResponseBody public String create(@ModelAttribute("userForm") InsertWordsBean insertWordsBean, HttpServletRequest request) {
         logPageLoad("db", request);
-        Datastore database = databaseService.getDatabase();
-        if(word == null){
-            logger.error("Word is null !!!");
-            return "error";
+        ObjectMapper objectMapper = new ObjectMapper();
+        Word[] words = null;
+        try {
+            words = objectMapper.readValue(insertWordsBean.getContent(), Word[].class);
+        } catch (IOException e) {
+            logger.error("ERROR",e);
         }
-        word.setLang("en-ru");
-        database.save(word);
-        return "done";
+        databaseService.getDatabase().save(words);
+        return "OK";
     }
 
     private void logPageLoad(String page, HttpServletRequest request){

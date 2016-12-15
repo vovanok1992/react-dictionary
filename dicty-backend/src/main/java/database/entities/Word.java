@@ -13,56 +13,41 @@ import java.util.Date;
 @Entity("testcol")
 public class Word {
     @Id
-    private ObjectId id;
+    private int id;
 
-    private String word;
-    private String[] translations;
-    private String lang;
+    private String en;
+    private String ru;
+    private String date;
 
-    Date lastUpdated = new Date();
-
-    @PrePersist
-    void prePersist(){
-        lastUpdated = new Date();
-    }
-
-    public ObjectId getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getWord() {
-        return word;
+    public String getEn() {
+        return en;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setEn(String en) {
+        this.en = en;
     }
 
-    public String[] getTranslations() {
-        return translations;
+    public String getRu() {
+        return ru;
     }
 
-    public void setTranslations(String[] translations) {
-        this.translations = translations;
+    public void setRu(String ru) {
+        this.ru = ru;
     }
 
-    public String getLang() {
-        return lang;
+    public String getDate() {
+        return date;
     }
 
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
-
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
+    public void setDate(String date) {
+        this.date = date;
     }
 }
