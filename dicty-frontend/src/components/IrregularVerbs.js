@@ -29,7 +29,7 @@ export default class IrregularVerbs extends React.Component {
 
     render() {
         const verbs = this.state.verbs.map((word, id) => {
-            return <tr key={id}>
+            return <tr key={id} onClick={()=>{WordActions.loadDefinition(word.inf)}}>
                 <td>{word.inf}</td>
                 <td>{word.ps}</td>
                 <td>{word.pp}</td>

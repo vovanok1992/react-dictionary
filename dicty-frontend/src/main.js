@@ -11,6 +11,8 @@ import IrregularVerbs from "./components/IrregularVerbs";
 
 import {Router, Route, IndexRoute, hashHistory} from "react-router";
 
+document.body.removeChild(document.getElementById("loadingIndicator"));
+
 ReactDOM.render(
     <Router history={hashHistory}>
         <Route path="/" component={Layout}>
