@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.io.File" %><%--
   Created by IntelliJ IDEA.
   User: Vovan
   Date: 06.11.2016
@@ -22,6 +22,11 @@
 
     out.println("<p>Maximum memory (MB):  " + (maxMemory == Long.MAX_VALUE ? "no limit" : (maxMemory / (1024 * 1024)))+"</p>");
     out.println("<p>Total memory available to JVM (MB): " + (Runtime.getRuntime().totalMemory() / (1024 * 1024))+"</p>");
+
+    String root = System.getProperty("os.name").equalsIgnoreCase("linux") ? "/" : "c:";
+
+    out.println("<p>Total disk space (GB): "+new File(root).getTotalSpace()/1024/1024/1024 + "</p>"); //in GB
+    out.println("<p>Free disk space (MB): "+new File(root).getFreeSpace()/1024/1024 + "</p>"); //in GB
 
 %>
 
