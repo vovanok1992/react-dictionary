@@ -433,7 +433,14 @@ export default function (state = baseState, action) {
                 forceNewWordInput: true
             };
 
-        case "" :
+        case "SAVE_NEW_WORD" :
+            const newWords = state.words.concat(action.payload);
+            return {
+                words: newWords,
+                inputWord: "",
+                filtered: newWords,
+                forceNewWordInput: false
+        };
 
         default:
             return state;
