@@ -25,10 +25,12 @@ class InputBoxContainer extends React.Component {
 
 export default connect(
     (state) => {
+        const isFilteredEmpty = state.words.filtered.length == 0;
+        const showTranslationInput = isFilteredEmpty || state.words.forceNewWordInput;
         return {
-            inputWord: state.inputWord,
-            showNewBtn: false,
-            showTranslationInput: false
+            inputWord: state.words.inputWord,
+            showNewBtn: !showTranslationInput && state.words.inputWord.length > 0,
+            showTranslationInput: showTranslationInput
         }
     },
     (dispatch) => bindActionCreators(

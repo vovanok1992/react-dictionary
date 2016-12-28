@@ -20,7 +20,7 @@ export default class InputBox extends React.Component {
     }
 
     render() {
-        const isWordEmpty = this.props.inputWord && this.props.inputWord.length > 0;
+        const isWordEmpty = this.props.inputWord.length > 0;
         const saveWordClassNames = classNames("wordSearch", "newWord", {"visible": this.props.translationBoxVisible});
         const translationTooltipClassNames = classNames("translationTooltip", {"visible": this.props.translationTooltipVisible});
         const newWordClassNames = classNames("inputWordBtn", {"visible": this.props.showNewWordBtn});

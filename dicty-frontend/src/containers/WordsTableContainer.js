@@ -9,8 +9,6 @@ import * as WordActions from "../actions/WordsActions";
 
 import WordsTable from "../components/WordsTable";
 
-import {getFilteredWords} from "../selectors/FilteredWordSelector";
-
 class WordsTableContainer extends React.Component {
     render() {
         return (
@@ -22,7 +20,7 @@ class WordsTableContainer extends React.Component {
 export default connect(
     (state) => {
         return {
-            words: getFilteredWords(state)
+            words: state.words.filtered
         }
     },
     (dispatch) => bindActionCreators({wordClicked: WordActions.wordClicked}, dispatch)
