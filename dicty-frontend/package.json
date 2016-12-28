@@ -4,7 +4,7 @@
   "description": "Simple front-end app for my dictionary",
   "main": "src/app.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --conrent-base src --inline --hot --host 0.0.0.0 --port 8081 --output-public-path=/dist/",
+    "start": "./node_modules/.bin/webpack-dev-server --watch-poll --conrent-base src --inline --hot --host 0.0.0.0 --port 8081 --output-public-path=/dist/",
     "prod": "./node_modules/.bin/webpack --minimize -p"
   },
   "author": "Vovan",
@@ -37,10 +37,11 @@
     "bootstrap-css-only": "^3.3.6",
     "classnames": "^2.2.5",
     "es6-promise": "^4.0.5",
-    "flux": "^3.1.0",
     "react": "15.x",
     "react-bootstrap": "^0.30.6",
     "react-dom": "15.x",
-    "react-router": "^3.0.0"
+    "react-redux": "^5.0.1",
+    "react-router": "^3.0.0",
+    "reselect": "^2.5.4"
   }
 }
