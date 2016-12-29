@@ -22,10 +22,18 @@ const translateReducer = (state, action) => {
     }
 };
 
+const loadingReducer = (state = false, action) => {
+    if(action.type == "LOADING"){
+        state = action.payload
+    }
+    return state;
+};
+
 
 export default combineReducers({
     words: WordsReducer,
     selectedWord: selectedWordReducer,
-    translatedWord: translateReducer
+    translatedWord: translateReducer,
+    loading: loadingReducer
 });
 

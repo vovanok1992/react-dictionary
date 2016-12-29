@@ -20,7 +20,7 @@ class LoadingOverlayContainer extends React.Component {
 export default connect(
     (state) => {
         return {
-            loading: false
+            loading: state.loading
         }
     },
     (dispatch) => bindActionCreators({inputWordChanged: WordActions.inputWordChanged}, dispatch)
