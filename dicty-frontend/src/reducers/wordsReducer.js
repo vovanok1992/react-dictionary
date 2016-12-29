@@ -3,6 +3,7 @@
  */
 
 import WordStringUtils from "../utils/WordStringUtils";
+import LocalStorageWordsService from "../utils/LocalStorageWordsService";
 
 const words = [
     {
@@ -407,7 +408,7 @@ const words = [
         "ru": "взломщик",
         "date": "08.12.2016"
     }
-];
+].concat(LocalStorageWordsService.getWords());
 const baseState = {
     words: words,
     filtered: words,
@@ -440,7 +441,7 @@ export default function (state = baseState, action) {
                 inputWord: "",
                 filtered: newWords,
                 forceNewWordInput: false
-        };
+            };
 
         default:
             return state;

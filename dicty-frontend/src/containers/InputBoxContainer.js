@@ -13,12 +13,13 @@ class InputBoxContainer extends React.Component {
     render() {
         return (
             <InputBox inputWord={this.props.inputWord}
-                      translationTooltipVisible={false}
                       translationBoxVisible={this.props.showTranslationInput}
                       showNewWordBtn={this.props.showNewBtn}
                       onInputWordChange={this.props.inputWordChanged}
                       onNewWordClicked={this.props.newWordClicked}
-                      onSaveWord={this.props.saveWord}/>
+                      onSaveWord={this.props.saveWord}
+                      onTranslationFocus={this.props.loadTranslation}
+                      tootltipTranslation={this.props.translationTooltip}/>
         );
     }
 }
@@ -30,14 +31,16 @@ export default connect(
         return {
             inputWord: state.words.inputWord,
             showNewBtn: !showTranslationInput && state.words.inputWord.length > 0,
-            showTranslationInput: showTranslationInput
+            showTranslationInput: showTranslationInput,
+            translationTooltip: state.translatedWord
         }
     },
     (dispatch) => bindActionCreators(
         {
             inputWordChanged: WordActions.inputWordChanged,
             newWordClicked: WordActions.newWordClicked,
-            saveWord: WordActions.saveWord
+            saveWord: WordActions.saveWord,
+            loadTranslation: WordActions.loadTranslation
         },
         dispatch)
 )(InputBoxContainer);

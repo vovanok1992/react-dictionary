@@ -8,6 +8,7 @@ import {createStore, applyMiddleware} from "redux"
 import allReducers from "./reducers"
 import {Provider} from "react-redux"
 import App from "./components/App"
+import promiseMiddleware from 'redux-promise-middleware';
 
 document.body.removeChild(document.getElementById("loadingIndicator"));
 
@@ -16,8 +17,7 @@ const logger = (store) => (next) => (action) => {
     next(action);
 };
 
-const store = createStore(allReducers, applyMiddleware(logger));
-console.log("allRecuers:", allReducers );
+const store = createStore(allReducers, applyMiddleware(logger, promiseMiddleware()));
 
 store.subscribe(() => {
    console.log("Store changed: ", store.getState());

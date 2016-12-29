@@ -14,10 +14,18 @@ const selectedWordReducer = (state = null, action) => {
     }
 };
 
+const translateReducer = (state, action) => {
+    switch(action.type){
+        case "WORD_TRANSLATION_FULFILLED" :
+            return action.payload.data.text.join("; ");
+        default: return null;
+    }
+};
 
 
 export default combineReducers({
     words: WordsReducer,
-    selectedWord: selectedWordReducer
+    selectedWord: selectedWordReducer,
+    translatedWord: translateReducer
 });
 
