@@ -2,14 +2,13 @@
  * Created by Vovan on 13.11.2016.
  */
 import React from "react";
-import * as WordActions from "../actions/WordsActions";
 import Word from "./Word";
 import WordsGroup from "./WordsGroup";
 
 export default class WordsTable extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState){
-        return this.props.words != nextProps.words;
+        return this.props.words.toString() != nextProps.words.toString();
     }
 
     groupWordsByDate(words) {
@@ -30,7 +29,7 @@ export default class WordsTable extends React.Component {
     makeWord(word){
         return <Word key={word.id}
                      onClick={() => {
-                         WordActions.loadDefinition(word.en);
+                         this.props.wordClicked(word);
                      }}
                      word={word.en}
                      translation={word.ru}

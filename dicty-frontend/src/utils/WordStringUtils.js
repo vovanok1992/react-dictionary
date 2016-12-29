@@ -14,4 +14,32 @@ export default class WordStringUtils {
         }
         return word.toLowerCase().indexOf(inputtedWord.trim().toLowerCase()) != -1;
     }
+
+    static filterArray(words, text) {
+        return words.filter((word) => {
+            return this.testWord(word.en, text) || this.testWord(word.ru, text)
+        });
+    }
+
+    static constructWord(fist, second) {
+        let enWord, ruWord;
+        const firstIsRussian = this.isRussian(fist);
+        if (firstIsRussian && this.isRussian(second)) {
+            alert("Both input fields contain russion symbols !");
+            return null;
+        }
+        if (firstIsRussian) {
+            enWord = second;
+            ruWord = fist;
+        } else {
+            enWord = fist;
+            ruWord = second;
+        }
+
+        return {
+            en: enWord,
+            ru: ruWord,
+            id: Date.now()
+        }
+    }
 }

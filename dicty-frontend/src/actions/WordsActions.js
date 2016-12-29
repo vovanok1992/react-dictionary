@@ -1,62 +1,46 @@
 /**
  * Created by Vovan on 12.11.2016.
  */
-import dispatcher from "../dispatcher";
-import translator from "../utils/Translator";
-import dictionary from "../utils/Dictionary";
-import axios from "axios";
-import localStorageWordsService from "../utils/LocalStorageWordsService";
 
-export function createWord(en, ru) {
-    localStorageWordsService.saveWord({
-        id: Date.now(),
-        en: en,
-        ru: ru
-    });
+import WordUtils from "../utils/WordStringUtils";
+import Translator from "../utils/Translator";
+import LocalStorageWordsService from "../utils/LocalStorageWordsService";
 
-    dispatcher.dispatch({
-        type: "CREATE_WORD",
-        en: en,
-        ru: ru
-    });
+export function wordClicked(word) {
+    return {
+        type: "WORD_CLICKED",
+        payload: word
+    }
 }
 
-export function loadDefinition(word) {
-    dispatcher.dispatch({type: "LOADING", enabled: true});
-    dictionary.getDefinition(word)
-        .then((info)=> {
-            console.log(info);
-            dispatcher.dispatch({type: "RECEIVE_DEFINITION", word: word, info: info.data.results});
-            dispatcher.dispatch({type: "LOADING", enabled: false});
-        });
+export function inputWordChanged(word) {
+    return {
+        type: "INPUT_WORD_CHANGED",
+        payload: word
+    }
 }
 
-export function translate(word, lang) {
-    translator.translate(word, lang).then((res)=> {
-        dispatcher.dispatch({type: "RECEIVE_TRANSLATION", word: word, translation: res.data.text.join("; ")});
-    });
+export function newWordClicked() {
+    return {type: "NEW_WORD_CLICKED"}
 }
 
-export function loadWords() {
-    console.log("LOADING WORDS")
-    dispatcher.dispatch({type: "LOADING", enabled: true});
-    const promise = axios.get("static/words.json");
-    promise.then((res) => {
-        dispatcher.dispatch({
-            type: "REFRESH_WORDS", words: res.data.words.concat(localStorageWordsService.getWords())
-        });
-        dispatcher.dispatch({type: "LOADING", enabled: false});
-    });
+export function saveWord(fist, second) {
+    const word = WordUtils.constructWord(fist, second);
+    if (!word) {
+        return null;
+    }
+
+    LocalStorageWordsService.saveWord(word);
+
+    return {
+        type: "SAVE_NEW_WORD",
+        payload: word
+    }
 }
 
-export function loadIrrVerbs() {
-    console.log("LOADING loadIrrVerbs");
-    dispatcher.dispatch({type: "LOADING", enabled: true});
-    const promise = axios.get("static/irregularVerbs.json");
-    promise.then((res) => {
-        dispatcher.dispatch({
-            type: "REFRESH_IRR_VERBS", words: res.data
-        });
-        dispatcher.dispatch({type: "LOADING", enabled: false});
-    });
+export function loadTranslation(word) {
+    return {
+        type: "WORD_TRANSLATION",
+        payload: Translator.translate(word, WordUtils.isRussian(word) ? "ru-en" : "en-ru")
+    }
 }

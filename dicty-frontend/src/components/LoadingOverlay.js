@@ -2,24 +2,17 @@
  * Created by Vovan on 14.11.2016.
  */
 import React from "react";
-
-import ApplicationStateStore from "../stores/ApplicationStateStore";
-
 export default class LoadingOverlay extends React.Component {
 
-    constructor() {
+    constructor(){
         super();
-        this.state = {loading: ApplicationStateStore.isLoading()}
+        this.state = {
+            headerScrolled: false
+        }
     }
 
     componentWillMount() {
         window.addEventListener('scroll', this.handleScroll.bind(this));
-
-        ApplicationStateStore.on("change", () => {
-            this.setState({
-                loading: ApplicationStateStore.isLoading()
-            });
-        });
     }
 
     componentWillUnmount() {
@@ -37,7 +30,7 @@ export default class LoadingOverlay extends React.Component {
 
     render() {
         let classes = "loadingContainer";
-        if (this.state.loading) {
+        if (this.props.loading) {
             classes += " enabled";
         }
 
