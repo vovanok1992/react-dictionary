@@ -29,7 +29,7 @@ export default class WordsTable extends React.Component {
     makeWord(word){
         return <Word key={word.id}
                      onClick={() => {
-                         this.props.wordClicked(word);
+                         this.props.wordClicked(word.en);
                      }}
                      word={word.en}
                      translation={word.ru}

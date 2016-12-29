@@ -5,7 +5,7 @@
 import React from "react"
 
 import WordsTableContainer from "../containers/WordsTableContainer";
-import GenericModalContainer from "../containers/GenericModalContainer";
+import GenericModalContainer from "../containers/DefinitionModalContainer";
 import InputBoxContainer from "../containers/InputBoxContainer";
 import LoadingOverlayContainer from "../containers/LoadingOverlayContainer";
 

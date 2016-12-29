@@ -16,7 +16,6 @@ export function init() {
                 return axios.get(appConfig.backendServer + "db");
             })
             .then((data) => {
-                console.log("Words", data);
                 dispatch({type: "WORDS_REFRESH", payload: data.data});
                 dispatch({type: "LOADING", payload: false});
             });

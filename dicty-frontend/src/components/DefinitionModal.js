@@ -6,7 +6,7 @@ import WordInfoPanel from "./WordInfoPanel";
 import Modal from "react-bootstrap/lib/Modal";
 import Button from "react-bootstrap/lib/Button";
 
-export default class GenericModal extends React.Component {
+export default class DefinitionModal extends React.Component {
 
     render() {
         return (
@@ -15,7 +15,7 @@ export default class GenericModal extends React.Component {
                     <Modal.Title>{this.props.header}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {this.props.content}
+                    <WordInfoPanel info={this.props.content}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={() => this.props.closeHandler(null)}>Close</Button>

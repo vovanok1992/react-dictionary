@@ -5,6 +5,7 @@
 import WordUtils from "../utils/WordStringUtils";
 import Translator from "../utils/Translator";
 import LocalStorageWordsService from "../utils/LocalStorageWordsService";
+import dictionary from "../utils/Dictionary";
 
 export function wordClicked(word) {
     return {
@@ -42,5 +43,20 @@ export function loadTranslation(word) {
     return {
         type: "WORD_TRANSLATION",
         payload: Translator.translate(word, WordUtils.isRussian(word) ? "ru-en" : "en-ru")
+    }
+}
+
+export function loadDefinition(word) {
+    if(word == null){
+        return {type: "UNLOAD_DEFINITION"};
+    }
+
+    return (dispatch) => {
+        dispatch({type: "LOADING", payload: true});
+        dictionary.getDefinition(word)
+            .then((data) => {
+                dispatch({type: "DEFINITION_LOADED", payload: data.data.results});
+                dispatch({type: "LOADING", payload: false});
+            })
     }
 }
