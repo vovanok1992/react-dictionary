@@ -8,8 +8,8 @@ export default class WordInfoPanel extends React.Component {
 
         const info = this.props.info;
 
-        if (typeof info == 'undefined' || info == null || info.length == 0) {
-            return <div>No definitions available</div>
+        if (typeof info == "undefined" || info == null || info.length == 0) {
+            return <div>No definitions available</div>;
         }
 
         const widget = info.map((element) => <div key={element.id}>

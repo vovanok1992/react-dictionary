@@ -2,7 +2,7 @@
  * Created by Vovan on 18.12.2016.
  */
 
-import React from "react"
+import React from "react";
 
 import GenericModalContainer from "../containers/DefinitionModalContainer";
 import LoadingOverlayContainer from "../containers/LoadingOverlayContainer";

@@ -12,18 +12,18 @@ export function wordClicked(word) {
     return {
         type: "WORD_CLICKED",
         payload: word
-    }
+    };
 }
 
 export function inputWordChanged(word) {
     return {
         type: "INPUT_WORD_CHANGED",
         payload: word
-    }
+    };
 }
 
 export function newWordClicked() {
-    return {type: "NEW_WORD_CLICKED"}
+    return {type: "NEW_WORD_CLICKED"};
 }
 
 export function saveWord(fist, second) {
@@ -37,14 +37,14 @@ export function saveWord(fist, second) {
     return {
         type: "SAVE_NEW_WORD",
         payload: word
-    }
+    };
 }
 
 export function loadTranslation(word) {
     return {
         type: "WORD_TRANSLATION",
         payload: Translator.translate(word, WordUtils.isRussian(word) ? "ru-en" : "en-ru")
-    }
+    };
 }
 
 export function loadDefinition(word) {
@@ -58,8 +58,8 @@ export function loadDefinition(word) {
             .then((data) => {
                 dispatch({type: "DEFINITION_LOADED", payload: data.data.results});
                 dispatch({type: "LOADING", payload: false});
-            })
-    }
+            });
+    };
 }
 
 export function loadIrrVerbs() {
@@ -69,7 +69,7 @@ export function loadIrrVerbs() {
             .then((data) => {
                 dispatch({type: "IRREGULAR_VERBS_FULFILLED", payload: data.data});
                 dispatch({type: "LOADING", payload: false});
-            })
-    }
+            });
+    };
 
 }

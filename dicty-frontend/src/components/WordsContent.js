@@ -2,7 +2,7 @@
  * Created by Vovan on 30.12.2016.
  */
 
-import React from "react"
+import React from "react";
 
 import WordsTableContainer from "../containers/WordsTableContainer";
 import InputBoxContainer from "../containers/InputBoxContainer";
@@ -14,4 +14,4 @@ const Component = () => (
     </div>
 );
 
-export default Component
+export default Component;

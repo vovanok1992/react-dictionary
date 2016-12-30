@@ -7,7 +7,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as WordActions from "../actions/WordsActions";
 
-import DefinitionModal from "../components/DefinitionModal"
+import DefinitionModal from "../components/DefinitionModal";
 
 class DefinitionModalContainer extends React.Component {
     render() {
@@ -24,7 +24,7 @@ export default connect(
     (state) => {
         return {
             content: state.wordDefinition
-        }
+        };
     },
     (dispatch) => bindActionCreators({closeHandler: WordActions.loadDefinition}, dispatch)
 )(DefinitionModalContainer);

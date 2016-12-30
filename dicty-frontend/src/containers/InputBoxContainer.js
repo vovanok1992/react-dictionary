@@ -7,7 +7,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as WordActions from "../actions/WordsActions";
 
-import InputBox from "../components/InputBox"
+import InputBox from "../components/InputBox";
 
 class InputBoxContainer extends React.Component {
     render() {
@@ -33,7 +33,7 @@ export default connect(
             showNewBtn: !showTranslationInput && state.words.inputWord.length > 0,
             showTranslationInput: showTranslationInput,
             translationTooltip: state.translatedWord
-        }
+        };
     },
     (dispatch) => bindActionCreators(
         {

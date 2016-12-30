@@ -14,7 +14,7 @@ export default class Header extends React.Component {
         super(props);
         this.state = {
             mainPage: hashHistory.getCurrentLocation().pathname == "/"
-        }
+        };
     }
 
 
@@ -35,7 +35,7 @@ export default class Header extends React.Component {
                 <Navbar.Collapse>
                     <Nav>
                         <NavItem eventKey={2} onClick={() => {
-                            location.href = "https://www.engvid.com/"
+                            location.href = "https://www.engvid.com/";
                         }}>EngVid</NavItem>
                         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}>Action</MenuItem>

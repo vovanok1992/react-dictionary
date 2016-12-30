@@ -2,7 +2,7 @@
  * Created by Vovan on 29.12.2016.
  */
 
-import axios from "axios"
+import axios from "axios";
 import appConfig from "../config/AppConfig";
 
 export function init() {
@@ -21,5 +21,5 @@ export function init() {
                 dispatch({type: "APP_INIT_FINISH"});
             });
 
-    }
+    };
 }

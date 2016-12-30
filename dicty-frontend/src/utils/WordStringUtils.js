@@ -17,7 +17,7 @@ export default class WordStringUtils {
 
     static filterArray(words, text) {
         return words.filter((word) => {
-            return this.testWord(word.en, text) || this.testWord(word.ru, text)
+            return this.testWord(word.en, text) || this.testWord(word.ru, text);
         });
     }
 
@@ -40,6 +40,6 @@ export default class WordStringUtils {
             en: enWord,
             ru: ruWord,
             id: Date.now()
-        }
+        };
     }
 }

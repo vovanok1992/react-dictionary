@@ -12,8 +12,8 @@ import WordsContent from "./components/WordsContent";
 import IrregularWordsContainer from "./containers/IrregularWordsContainer";
 import {init} from "./actions/AppActions";
 
-import { Router, Route, IndexRoute, hashHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { Router, Route, IndexRoute, hashHistory } from "react-router";
+import { syncHistoryWithStore } from "react-router-redux";
 
 document.body.removeChild(document.getElementById("loadingIndicator"));
 

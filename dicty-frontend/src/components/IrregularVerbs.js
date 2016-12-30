@@ -7,7 +7,7 @@ export default class IrregularVerbs extends React.Component {
         super();
         this.state = {
             text: ""
-        }
+        };
     }
 
     componentWillMount() {
@@ -34,7 +34,7 @@ export default class IrregularVerbs extends React.Component {
     generateTableContent() {
         return this.props.verbs
             .filter((word) => {
-                return (word.inf + word.ps + word.pp + word.tr).indexOf(this.state.text) != -1
+                return (word.inf + word.ps + word.pp + word.tr).indexOf(this.state.text) != -1;
             })
             .map((word, id) => {
                 return <tr key={id} onClick={() => this.props.loadDefinition(word.inf)}>
@@ -42,13 +42,13 @@ export default class IrregularVerbs extends React.Component {
                     <td>{word.ps}</td>
                     <td>{word.pp}</td>
                     <td>{word.tr}</td>
-                </tr>
+                </tr>;
             });
     }
 
     render() {
         if (!this.props.verbs) {
-            return <div>No content</div>
+            return <div>No content</div>;
         }
         const verbsDom = this.generateTableContent();
         const isWordEmpty = this.state.text.length == 0;

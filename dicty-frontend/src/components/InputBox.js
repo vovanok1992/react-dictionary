@@ -9,7 +9,7 @@ export default class InputBox extends React.Component {
         this.state = {
             inputTranslation: "",
             showTooltip: false
-        }
+        };
     }
 
     translationInputFocused() {
@@ -32,13 +32,13 @@ export default class InputBox extends React.Component {
                 <div className="wordSearch">
                     <input type="text"
                            onChange={(e) => {
-                               this.props.onInputWordChange(e.target.value)
+                               this.props.onInputWordChange(e.target.value);
                            }}
                            value={this.props.inputWord}
                            className="wordInput"
                            placeholder="Input your word..."/>
                     <span onClick={() => {
-                        this.props.onInputWordChange("")
+                        this.props.onInputWordChange("");
                     }}
                           className={newWordIconClassNames}/>
                     <Button className={newWordClassNames}
@@ -51,7 +51,7 @@ export default class InputBox extends React.Component {
                            onChange={(e) => this.setState({inputTranslation: e.target.value})}
                            onFocus={this.translationInputFocused.bind(this)}
                            onBlur={() => {
-                               this.setState({translationTooltipVisible: false})
+                               this.setState({translationTooltipVisible: false});
                            }}
                            value={this.state.inputTranslation}
                            placeholder="Input your translation..."/>

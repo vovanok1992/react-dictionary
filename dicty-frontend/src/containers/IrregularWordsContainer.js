@@ -14,7 +14,7 @@ class IrregularWordsContainer extends React.Component {
         if (this.props.appInited) {
             return <IrregularVerbs loadIrrVerbs={this.props.loadIrrVerbs}
                                    loadDefinition={this.props.loadDefinition}
-                                   verbs={this.props.verbs}/>
+                                   verbs={this.props.verbs}/>;
         }
 
         return (
@@ -28,7 +28,7 @@ export default connect(
         return {
             appInited: state.appInited,
             verbs: state.irregularVerbs
-        }
+        };
     },
     (dispatch) => bindActionCreators({
         loadIrrVerbs: WordActions.loadIrrVerbs,

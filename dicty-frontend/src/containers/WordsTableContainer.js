@@ -21,7 +21,7 @@ export default connect(
     (state) => {
         return {
             words: state.words.filtered
-        }
+        };
     },
     (dispatch) => bindActionCreators({wordClicked: WordActions.loadDefinition}, dispatch)
 )(WordsTableContainer);

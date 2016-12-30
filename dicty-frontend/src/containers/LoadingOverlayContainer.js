@@ -7,7 +7,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import * as WordActions from "../actions/WordsActions";
 
-import LoadingOverlay from "../components/LoadingOverlay"
+import LoadingOverlay from "../components/LoadingOverlay";
 
 class LoadingOverlayContainer extends React.Component {
     render() {
@@ -21,7 +21,7 @@ export default connect(
     (state) => {
         return {
             loading: state.loading > 0
-        }
+        };
     },
     (dispatch) => bindActionCreators({inputWordChanged: WordActions.inputWordChanged}, dispatch)
 )(LoadingOverlayContainer);

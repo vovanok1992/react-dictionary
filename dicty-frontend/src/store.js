@@ -4,8 +4,8 @@
 
 import allReducers from "./reducers";
 import {createStore, applyMiddleware} from "redux";
-import promiseMiddleware from 'redux-promise-middleware';
-import thunk from 'redux-thunk'
+import promiseMiddleware from "redux-promise-middleware";
+import thunk from "redux-thunk";
 
 const logger = (store) => (next) => (action) => {
     console.log("action fired", action);

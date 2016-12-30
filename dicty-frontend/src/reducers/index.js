@@ -1,14 +1,14 @@
 /**
  * Created by Vovan on 18.12.2016.
  */
-import {combineReducers} from "redux"
+import {combineReducers} from "redux";
 
-import WordsReducer from "./wordsReducer"
-import { routerReducer } from 'react-router-redux'
+import WordsReducer from "./wordsReducer";
+import {routerReducer} from "react-router-redux";
 
 const selectedWordReducer = (state = null, action) => {
     switch (action.type) {
-        case 'WORD_CLICKED':
+        case "WORD_CLICKED":
             return action.payload;
         default:
             return state;
@@ -25,9 +25,9 @@ const translateReducer = (state, action) => {
 };
 
 const loadingReducer = (state = 0, action) => {
-    switch(action.type){
+    switch (action.type) {
         case "LOADING" :
-            if(action.payload){
+            if (action.payload) {
                 return state + 1;
             } else {
                 return state - 1;
@@ -37,9 +37,9 @@ const loadingReducer = (state = 0, action) => {
 };
 
 const wordDefinitionReducer = (state = null, action) => {
-    if(action.type == "DEFINITION_LOADED"){
-        return action.payload
-    } else if (action.type == "UNLOAD_DEFINITION"){
+    if (action.type == "DEFINITION_LOADED") {
+        return action.payload;
+    } else if (action.type == "UNLOAD_DEFINITION") {
         return null;
     }
 
@@ -48,7 +48,7 @@ const wordDefinitionReducer = (state = null, action) => {
 
 const appInitStateReducer = (state = false, action) => {
 
-    if(action.type == "APP_INIT_FINISH"){
+    if (action.type == "APP_INIT_FINISH") {
         return true;
     }
 
@@ -56,7 +56,7 @@ const appInitStateReducer = (state = false, action) => {
 };
 
 const irrVerbsReducer = (state = [], action) => {
-    if(action.type == "IRREGULAR_VERBS_FULFILLED"){
+    if (action.type == "IRREGULAR_VERBS_FULFILLED") {
         return action.payload;
     }
     return state;

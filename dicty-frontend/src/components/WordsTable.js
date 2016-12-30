@@ -33,7 +33,7 @@ export default class WordsTable extends React.Component {
                      }}
                      word={word.en}
                      translation={word.ru}
-        />
+        />;
     }
 
     makeGroups(groups){
@@ -41,7 +41,7 @@ export default class WordsTable extends React.Component {
             const words = groups[key].map((word) => {
                 return this.makeWord(word);
             });
-            return <WordsGroup header={key} key={key} index={index} wordsElements={words}/>
+            return <WordsGroup header={key} key={key} index={index} wordsElements={words}/>;
         });
     }
 

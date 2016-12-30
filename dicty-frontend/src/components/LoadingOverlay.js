@@ -12,11 +12,11 @@ export default class LoadingOverlay extends React.Component {
     }
 
     componentWillMount() {
-        window.addEventListener('scroll', this.handleScroll.bind(this));
+        window.addEventListener("scroll", this.handleScroll.bind(this));
     }
 
     componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll.bind(this));
+        window.removeEventListener("scroll", this.handleScroll.bind(this));
     }
 
     handleScroll() {
