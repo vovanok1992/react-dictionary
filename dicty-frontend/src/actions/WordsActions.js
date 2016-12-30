@@ -6,6 +6,7 @@ import WordUtils from "../utils/WordStringUtils";
 import Translator from "../utils/Translator";
 import LocalStorageWordsService from "../utils/LocalStorageWordsService";
 import dictionary from "../utils/Dictionary";
+import axios from "axios";
 
 export function wordClicked(word) {
     return {
@@ -59,4 +60,16 @@ export function loadDefinition(word) {
                 dispatch({type: "LOADING", payload: false});
             })
     }
+}
+
+export function loadIrrVerbs() {
+    return (dispatch) => {
+        dispatch({type: "LOADING", payload: true});
+        axios.get("static/irregularVerbs.json")
+            .then((data) => {
+                dispatch({type: "IRREGULAR_VERBS_FULFILLED", payload: data.data});
+                dispatch({type: "LOADING", payload: false});
+            })
+    }
+
 }

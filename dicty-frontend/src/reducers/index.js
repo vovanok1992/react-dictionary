@@ -4,6 +4,7 @@
 import {combineReducers} from "redux"
 
 import WordsReducer from "./wordsReducer"
+import { routerReducer } from 'react-router-redux'
 
 const selectedWordReducer = (state = null, action) => {
     switch (action.type) {
@@ -23,9 +24,14 @@ const translateReducer = (state, action) => {
     }
 };
 
-const loadingReducer = (state = false, action) => {
-    if (action.type == "LOADING") {
-        state = action.payload
+const loadingReducer = (state = 0, action) => {
+    switch(action.type){
+        case "LOADING" :
+            if(action.payload){
+                return state + 1;
+            } else {
+                return state - 1;
+            }
     }
     return state;
 };
@@ -40,11 +46,30 @@ const wordDefinitionReducer = (state = null, action) => {
     return state;
 };
 
+const appInitStateReducer = (state = false, action) => {
+
+    if(action.type == "APP_INIT_FINISH"){
+        return true;
+    }
+
+    return state;
+};
+
+const irrVerbsReducer = (state = [], action) => {
+    if(action.type == "IRREGULAR_VERBS_FULFILLED"){
+        return action.payload;
+    }
+    return state;
+};
+
 export default combineReducers({
     words: WordsReducer,
     selectedWord: selectedWordReducer,
     translatedWord: translateReducer,
     loading: loadingReducer,
-    wordDefinition: wordDefinitionReducer
+    wordDefinition: wordDefinitionReducer,
+    routing: routerReducer,
+    appInited: appInitStateReducer,
+    irregularVerbs: irrVerbsReducer
 });
 

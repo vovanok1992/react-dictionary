@@ -9,6 +9,15 @@ import {hashHistory} from "react-router";
 
 export default class Header extends React.Component {
 
+    constructor(props){
+        window.whistory = hashHistory;
+        super(props);
+        this.state = {
+            mainPage: hashHistory.getCurrentLocation().pathname == "/"
+        }
+    }
+
+
     render() {
         return (
             <Navbar collapseOnSelect>
@@ -45,10 +54,16 @@ export default class Header extends React.Component {
     }
 
 
+    switchPage(){
+        this.setState({mainPage: !this.state.mainPage});
+        hashHistory.push(this.state.mainPage ? "irregular" : "/");
+    }
+
     getSwitchButton(){
         return (
-            <NavItem eventKey={1}>
-                {"Irregular Verbs"}
+            <NavItem eventKey={1} onClick={this.switchPage.bind(this)}>
+                {this.state.mainPage && "Irregular Verbs"}
+                {!this.state.mainPage && "Words Table"}
             </NavItem>
         );
     }

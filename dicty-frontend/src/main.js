@@ -4,33 +4,31 @@ import "es6-promise/auto";
 import "./styles/main.scss";
 import "../index.html";
 
-import {createStore, applyMiddleware} from "redux"
-import allReducers from "./reducers"
-import {Provider} from "react-redux"
-import App from "./components/App"
-import promiseMiddleware from 'redux-promise-middleware';
-import ReduxThunk from 'redux-thunk'
+import store from "./store";
+import {Provider} from "react-redux";
+import App from "./components/App";
+import WordsContent from "./components/WordsContent";
 
+import IrregularWordsContainer from "./containers/IrregularWordsContainer";
 import {init} from "./actions/AppActions";
+
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 document.body.removeChild(document.getElementById("loadingIndicator"));
 
-const logger = (store) => (next) => (action) => {
-    console.log("action fired", action);
-    next(action);
-};
-
-const store = createStore(allReducers, applyMiddleware(logger, ReduxThunk, promiseMiddleware()));
+const history = syncHistoryWithStore(hashHistory, store);
 
 store.dispatch(init());
 
-store.subscribe(() => {
-   console.log("Store changed: ", store.getState());
-});
-
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <Router history={history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={WordsContent}/>
+                <Route path="irregular" component={IrregularWordsContainer}/>
+            </Route>
+        </Router>
     </Provider>
     , document.getElementById("app")
 );

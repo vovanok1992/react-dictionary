@@ -4,27 +4,24 @@
 
 import React from "react"
 
-import WordsTableContainer from "../containers/WordsTableContainer";
 import GenericModalContainer from "../containers/DefinitionModalContainer";
-import InputBoxContainer from "../containers/InputBoxContainer";
 import LoadingOverlayContainer from "../containers/LoadingOverlayContainer";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-const App = () => (
 
-    <div className="pageBody">
-        <Header/>
-        <div className="container">
-            <InputBoxContainer/>
-            <WordsTableContainer/>
-        </div>
-        <GenericModalContainer/>
-        <LoadingOverlayContainer/>
-        <Footer/>
-    </div>
+export default class App extends React.Component {
 
-);
-
-export default App;
+    render() {
+        return (
+            <div className="pageBody">
+                <Header/>
+                {this.props.children}
+                <GenericModalContainer/>
+                <LoadingOverlayContainer/>
+                <Footer/>
+            </div>
+        );
+    }
+}

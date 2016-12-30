@@ -1,35 +1,20 @@
 import React from "react";
 
 import * as WordActions from "../actions/WordsActions";
-import IrregularVerbsStore from "../stores/IrregularVerbsStore"
 
 export default class IrregularVerbs extends React.Component {
 
-    constructor(){
-        super();
-
-        this.state = {
-            verbs:[]
-        };
-
-        this.handleWordsChange = () => {
-            this.setState({verbs: IrregularVerbsStore.getVerbs()})
-        }
-    }
-
     componentWillMount(){
-        WordActions.loadIrrVerbs();
-        IrregularVerbsStore.on("change", this.handleWordsChange);
+        this.props.loadIrrVerbs();
     }
-
-    componentWillUnmount(){
-        IrregularVerbsStore.removeListener("change", this.handleWordsChange);
-    }
-
 
     render() {
-        const verbs = this.state.verbs.map((word, id) => {
-            return <tr key={id} onClick={()=>{WordActions.loadDefinition(word.inf)}}>
+        if(!this.props.verbs){
+            return <div>No content</div>
+        }
+
+        const verbs = this.props.verbs.map((word, id) => {
+            return <tr key={id} onClick={()=>{this.props.loadDefinition(word.inf)}}>
                 <td>{word.inf}</td>
                 <td>{word.ps}</td>
                 <td>{word.pp}</td>

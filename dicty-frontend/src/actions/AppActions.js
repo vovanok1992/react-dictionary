@@ -18,6 +18,7 @@ export function init() {
             .then((data) => {
                 dispatch({type: "WORDS_REFRESH", payload: data.data});
                 dispatch({type: "LOADING", payload: false});
+                dispatch({type: "APP_INIT_FINISH"});
             });
 
     }
