@@ -8,7 +8,7 @@ import WordsGroup from "./WordsGroup";
 export default class WordsTable extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState){
-        return this.props.words.toString() != nextProps.words.toString();
+        return this.props.words != nextProps.words;
     }
 
     groupWordsByDate(words) {
