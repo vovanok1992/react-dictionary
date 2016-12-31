@@ -62,6 +62,16 @@ const irrVerbsReducer = (state = [], action) => {
     return state;
 };
 
+const googleAuthReducer = (state = {token: null, info: null}, action) => {
+    switch(action.type){
+        case "GOOGLE_ACCESS_TOKEN":
+            return {...state, token: action.payload};
+        case "GOOGLE_PROFILE":
+            return {...state, info: action.payload};
+    }
+    return state;
+};
+
 export default combineReducers({
     words: WordsReducer,
     selectedWord: selectedWordReducer,
@@ -70,6 +80,7 @@ export default combineReducers({
     wordDefinition: wordDefinitionReducer,
     routing: routerReducer,
     appInited: appInitStateReducer,
-    irregularVerbs: irrVerbsReducer
+    irregularVerbs: irrVerbsReducer,
+    auth: googleAuthReducer
 });
 

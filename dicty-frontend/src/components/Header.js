@@ -10,13 +10,11 @@ import {hashHistory} from "react-router";
 export default class Header extends React.Component {
 
     constructor(props){
-        window.whistory = hashHistory;
         super(props);
         this.state = {
             mainPage: hashHistory.getCurrentLocation().pathname == "/"
         };
     }
-
 
     render() {
         return (
@@ -28,15 +26,12 @@ export default class Header extends React.Component {
                             <a className="logoText"
                                href="https://github.com/vovanok1992/react-dictionary/tree/master/dicty-frontend">ReactDictionary</a>
                         </div>
-
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        <NavItem eventKey={2} onClick={() => {
-                            location.href = "https://www.engvid.com/";
-                        }}>EngVid</NavItem>
+                        {this.getSwitchButton()}
                         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}>Action</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
@@ -46,13 +41,22 @@ export default class Header extends React.Component {
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
-                        {this.getSwitchButton()}
+                        {this.getLoginButton()}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );
     }
 
+
+    getLoginButton(){
+        if(this.props.info){
+            return <NavItem>{this.props.info.name}</NavItem>
+        } else {
+            return <NavItem onClick={()=>location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&state=%2Fprofile&redirect_uri=" + location.origin + "&response_type=token&client_id=302152968251-mqcm5m6g3c366njrhduggf04jifm3osi.apps.googleusercontent.com"
+            }>Login</NavItem>
+        }
+    }
 
     switchPage(){
         this.setState({mainPage: !this.state.mainPage});
