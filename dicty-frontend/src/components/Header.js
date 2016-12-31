@@ -53,7 +53,7 @@ export default class Header extends React.Component {
         if(this.props.info){
             return <NavItem>{this.props.info.name}</NavItem>
         } else {
-            return <NavItem onClick={()=>location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&state=%2Fprofile&redirect_uri=" + location.origin + "&response_type=token&client_id=302152968251-mqcm5m6g3c366njrhduggf04jifm3osi.apps.googleusercontent.com"
+            return <NavItem onClick={()=>location.href = "https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&state=%2Fprofile&redirect_uri=" + location.origin + location.pathname + "&response_type=token&client_id=302152968251-mqcm5m6g3c366njrhduggf04jifm3osi.apps.googleusercontent.com"
             }>Login</NavItem>
         }
     }
