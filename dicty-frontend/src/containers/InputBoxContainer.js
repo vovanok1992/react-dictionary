@@ -19,7 +19,8 @@ class InputBoxContainer extends React.Component {
                       onNewWordClicked={this.props.newWordClicked}
                       onSaveWord={this.props.saveWord}
                       onTranslationFocus={this.props.loadTranslation}
-                      tootltipTranslation={this.props.translationTooltip}/>
+                      tootltipTranslation={this.props.translationTooltip}
+                      auth={this.props.auth}/>
         );
     }
 }
@@ -32,14 +33,15 @@ export default connect(
             inputWord: state.words.inputWord,
             showNewBtn: !showTranslationInput && state.words.inputWord.length > 0,
             showTranslationInput: showTranslationInput,
-            translationTooltip: state.translatedWord
+            translationTooltip: state.translatedWord,
+            auth: state.auth
         };
     },
     (dispatch) => bindActionCreators(
         {
             inputWordChanged: WordActions.inputWordChanged,
             newWordClicked: WordActions.newWordClicked,
-            saveWord: WordActions.saveWord,
+            saveWord: WordActions.saveOnServer,
             loadTranslation: WordActions.loadTranslation
         },
         dispatch)

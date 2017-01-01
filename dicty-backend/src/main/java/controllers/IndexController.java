@@ -1,7 +1,8 @@
 package controllers;
 
 import beans.InsertWordsBean;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import beans.SaveWordBean;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import database.DatabaseService;
 import database.entities.Word;
@@ -15,11 +16,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import utils.ClientInfoUtils;
+import utils.RequestSender;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Vovan on 29.10.2016.
@@ -71,6 +75,32 @@ public class IndexController {
         }
         databaseService.getDatabase().save(words);
         return "OK";
+    }
+
+    @RequestMapping(value = "/saveword", method = RequestMethod.POST)
+    @ResponseBody public String save(@RequestBody SaveWordBean data,  HttpServletRequest request){
+        logPageLoad("save word token=" + data.getToken() , request);
+
+        String result = null;
+        try {
+           result = RequestSender.post("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + data.getToken());
+        } catch (Exception e) {
+            return "{ \"response\":\"FAIL\", \"code\":1 }";
+        }
+        Map<String, String> resp = null;
+        try {
+            resp = new ObjectMapper().readValue(result, new TypeReference<Map<String, String>>(){});
+        } catch (Exception e){
+            logger.error("ERROR", e);
+            return "{ \"response\":\"FAIL\", \"code\":2 }";
+        }
+
+        if(resp.get("email") == null || !resp.get("email").equals("vovanok1992@gmail.com")){
+            return "{ \"response\":\"FAIL\", \"code\":3 }";
+        }
+
+       // databaseService.getDatabase().save(data.getWord());
+        return "{ \"response\":\"OK\"}";
     }
 
     private void logPageLoad(String page, HttpServletRequest request){

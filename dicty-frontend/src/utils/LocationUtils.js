@@ -5,9 +5,7 @@ import { hashHistory } from "react-router";
 import Cookies from "../utils/Cookies";
 
 export function processTempToken() {
-    window.c = Cookies;
-
-    let hash = hashHistory.getCurrentLocation().pathname;
+    const hash = hashHistory.getCurrentLocation().pathname;
     let access_token = getParam(hash, "access_token");
     if(access_token){
         Cookies.createCookie("token", access_token, getParam(hash, "expires_in"));

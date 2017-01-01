@@ -13,17 +13,17 @@ import java.util.Date;
 @Entity("testcol")
 public class Word {
     @Id
-    private int id;
+    private long id;
 
     private String en;
     private String ru;
     private String date;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

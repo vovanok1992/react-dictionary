@@ -39,7 +39,17 @@ export default class WordStringUtils {
         return {
             en: enWord,
             ru: ruWord,
-            id: Date.now()
+            id: Date.now(),
+            date: this.getDate()
         };
     }
+
+    static getDate() {
+        const currentDate = new Date();
+        const day = currentDate.getDate();
+        const month = currentDate.getMonth() + 1;
+        const year = currentDate.getFullYear();
+        return ("0" + day).slice(-2) + "." + ("0" + month).slice(-2) + "." + year;
+    }
+
 }

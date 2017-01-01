@@ -7,13 +7,7 @@ import Translator from "../utils/Translator";
 import LocalStorageWordsService from "../utils/LocalStorageWordsService";
 import dictionary from "../utils/Dictionary";
 import axios from "axios";
-
-export function wordClicked(word) {
-    return {
-        type: "WORD_CLICKED",
-        payload: word
-    };
-}
+import config from "../config/AppConfig";
 
 export function inputWordChanged(word) {
     return {
@@ -40,6 +34,43 @@ export function saveWord(fist, second) {
     };
 }
 
+export function saveOnServer(fistWord, secondWord, token) {
+
+    const word = WordUtils.constructWord(fistWord, secondWord);
+    if (!word) {
+        return null;
+    }
+
+    return (dispatch) => {
+        dispatch({type: "LOADING", payload: true});
+        axios.get("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + token)
+            .then((data) => {
+                axios.post(config.getBackendServer() + "saveword", {
+                    "word": word,
+                    "token": token
+                }).then((data) => {
+                    if(data.data.response == "OK"){
+                        dispatch({type: "SAVE_NEW_WORD", payload: word});
+                    } else {
+                        alert("ERROR validating google token. " + data.data.code);
+                    }
+                    dispatch({type: "LOADING", payload: false});
+                }).catch((e) => {
+                    alert("Unknown error");
+                    console.log("Error", e);
+                    dispatch({type: "LOADING", payload: false});
+                })
+            })
+            .catch((error) => {
+                alert("Sorry, but your temp token is not valid any more. Please relogin");
+                dispatch({type: "GOOGLE_ACCESS_TOKEN", payload: null});
+                dispatch({type: "GOOGLE_PROFILE", payload: null});
+                dispatch({type: "LOADING", payload: false});
+            })
+
+    }
+}
+
 export function loadTranslation(word) {
     return {
         type: "WORD_TRANSLATION",
@@ -48,7 +79,7 @@ export function loadTranslation(word) {
 }
 
 export function loadDefinition(word) {
-    if(word == null){
+    if (word == null) {
         return {type: "UNLOAD_DEFINITION"};
     }
 

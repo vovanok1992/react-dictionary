@@ -16,6 +16,14 @@ export default class InputBox extends React.Component {
         this.props.onTranslationFocus(this.props.inputWord);
     }
 
+    saveWordClicked(){
+        if(this.props.auth.token){
+            this.props.onSaveWord(this.props.inputWord, this.state.inputTranslation, this.props.auth.token)
+        } else {
+            alert("Sorry, but you not authorized");
+        }
+    }
+
     render() {
 
         const isWordEmpty = this.props.inputWord.length > 0;
@@ -56,8 +64,7 @@ export default class InputBox extends React.Component {
                            value={this.state.inputTranslation}
                            placeholder="Input your translation..."/>
                     <span className="glyphicon glyphicon-plus"/>
-                    <Button onClick={() => this.props.onSaveWord(this.props.inputWord, this.state.inputTranslation)
-                    } className="saveWord">Save</Button>
+                    <Button onClick={this.saveWordClicked.bind(this)} className="saveWord">Save</Button>
 
                     <div className={translationTooltipClassNames}>
                         <div className="in tooltip bottom"
