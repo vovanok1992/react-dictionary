@@ -41,21 +41,22 @@ public class IndexController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleRequest(HttpServletRequest request,
-                                      HttpServletResponse response){
+                                      HttpServletResponse response) {
         logPageLoad("index", request);
         return new ModelAndView("index");
     }
 
     @RequestMapping(value = "/dbedit", method = RequestMethod.GET)
     public String handleDbEditRequest(HttpServletRequest request,
-                                      Model model){
+                                      Model model) {
         logPageLoad("dbedit", request);
         model.addAttribute("userForm", new InsertWordsBean());
-        return"dbinsert";
+        return "dbinsert";
     }
 
     @RequestMapping(value = "/db", method = RequestMethod.GET)
-    @ResponseBody public List<Word> db(HttpServletRequest request) {
+    @ResponseBody
+    public List<Word> db(HttpServletRequest request) {
         logPageLoad("db", request);
         Datastore database = databaseService.getDatabase();
 
@@ -64,38 +65,41 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    @ResponseBody public String create(@ModelAttribute("userForm") InsertWordsBean insertWordsBean, HttpServletRequest request) {
+    @ResponseBody
+    public String create(@ModelAttribute("userForm") InsertWordsBean insertWordsBean, HttpServletRequest request) {
         logPageLoad("db", request);
         ObjectMapper objectMapper = new ObjectMapper();
         Word[] words = null;
         try {
             words = objectMapper.readValue(insertWordsBean.getContent(), Word[].class);
         } catch (IOException e) {
-            logger.error("ERROR",e);
+            logger.error("ERROR", e);
         }
         databaseService.getDatabase().save(words);
         return "OK";
     }
 
     @RequestMapping(value = "/saveword", method = RequestMethod.POST)
-    @ResponseBody public String save(@RequestBody SaveWordBean data,  HttpServletRequest request){
-        logPageLoad("save word token=" + data.getToken() , request);
+    @ResponseBody
+    public String save(@RequestBody SaveWordBean data, HttpServletRequest request) {
+        logPageLoad("save word token=" + data.getToken(), request);
 
         String result = null;
         try {
-           result = RequestSender.post("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + data.getToken());
+            result = RequestSender.post("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + data.getToken());
         } catch (Exception e) {
             return "{ \"response\":\"FAIL\", \"code\":1 }";
         }
         Map<String, String> resp = null;
         try {
-            resp = new ObjectMapper().readValue(result, new TypeReference<Map<String, String>>(){});
-        } catch (Exception e){
+            resp = new ObjectMapper().readValue(result, new TypeReference<Map<String, String>>() {
+            });
+        } catch (Exception e) {
             logger.error("ERROR", e);
             return "{ \"response\":\"FAIL\", \"code\":2 }";
         }
 
-        if(resp.get("email") == null || !resp.get("email").equals("vovanok1992@gmail.com")){
+        if (resp.get("email") == null || !resp.get("email").equals("vovanok1992@gmail.com")) {
             return "{ \"response\":\"FAIL\", \"code\":3 }";
         }
 
@@ -103,7 +107,7 @@ public class IndexController {
         return "{ \"response\":\"OK\"}";
     }
 
-    private void logPageLoad(String page, HttpServletRequest request){
-        logger.info("#OP> " + page + " ip=" + ClientInfoUtils.getClientIpAddr(request) + " ua="+request.getHeader("User-Agent"));
+    private void logPageLoad(String page, HttpServletRequest request) {
+        logger.info("#OP> " + page + " ip=" + ClientInfoUtils.getClientIpAddr(request) + " ua=" + request.getHeader("User-Agent"));
     }
 }

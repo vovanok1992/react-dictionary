@@ -12,7 +12,8 @@ const logger = (store) => (next) => (action) => {
     next(action);
 };
 
-const store = createStore(allReducers, applyMiddleware(logger, thunk, promiseMiddleware()));
+const store = createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), // redux debug tool
+    applyMiddleware(logger, thunk, promiseMiddleware()));
 store.subscribe(() => {
     console.log("Store changed: ", store.getState());
 });

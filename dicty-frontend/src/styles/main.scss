@@ -101,11 +101,13 @@ html {
   transition: 1s;
   transform: translateX(50px);
   opacity: 0;
+  pointer-events: none;
 }
 
 .inputWordBtn.visible {
   opacity: 1;
   transform: translateX(0);
+  pointer-events: all;
 }
 
 .loadingContainer.enabled.stick {

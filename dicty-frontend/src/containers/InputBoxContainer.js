@@ -20,7 +20,8 @@ class InputBoxContainer extends React.Component {
                       onSaveWord={this.props.saveWord}
                       onTranslationFocus={this.props.loadTranslation}
                       tootltipTranslation={this.props.translationTooltip}
-                      auth={this.props.auth}/>
+                      auth={this.props.auth}
+                      disabled={this.props.disabled}/>
         );
     }
 }
@@ -34,7 +35,8 @@ export default connect(
             showNewBtn: !showTranslationInput && state.words.inputWord.length > 0,
             showTranslationInput: showTranslationInput,
             translationTooltip: state.translatedWord,
-            auth: state.auth
+            auth: state.auth,
+            disabled: state.loading > 0
         };
     },
     (dispatch) => bindActionCreators(

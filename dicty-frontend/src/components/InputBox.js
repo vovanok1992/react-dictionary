@@ -64,7 +64,9 @@ export default class InputBox extends React.Component {
                            value={this.state.inputTranslation}
                            placeholder="Input your translation..."/>
                     <span className="glyphicon glyphicon-plus"/>
-                    <Button onClick={this.saveWordClicked.bind(this)} className="saveWord">Save</Button>
+                    <Button onClick={this.saveWordClicked.bind(this)}
+                            className="saveWord"
+                            disabled={this.props.disabled}>Save</Button>
 
                     <div className={translationTooltipClassNames}>
                         <div className="in tooltip bottom"
