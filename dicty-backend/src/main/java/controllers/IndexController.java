@@ -99,7 +99,7 @@ public class IndexController {
             return "{ \"response\":\"FAIL\", \"code\":3 }";
         }
 
-       // databaseService.getDatabase().save(data.getWord());
+        databaseService.getDatabase().save(data.getWord());
         return "{ \"response\":\"OK\"}";
     }
 
