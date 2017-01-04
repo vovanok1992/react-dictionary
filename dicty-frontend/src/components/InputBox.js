@@ -18,7 +18,8 @@ export default class InputBox extends React.Component {
 
     saveWordClicked(){
         if(this.props.auth.token){
-            this.props.onSaveWord(this.props.inputWord, this.state.inputTranslation, this.props.auth.token)
+            this.props.onSaveWord(this.props.inputWord, this.state.inputTranslation, this.props.auth.token);
+            this.setState({inputTranslation: ""});
         } else {
             alert("Sorry, but you not authorized");
         }
@@ -47,6 +48,7 @@ export default class InputBox extends React.Component {
                            placeholder="Input your word..."/>
                     <span onClick={() => {
                         this.props.onInputWordChange("");
+                        this.setState({inputTranslation: ""});
                     }}
                           className={newWordIconClassNames}/>
                     <Button className={newWordClassNames}
