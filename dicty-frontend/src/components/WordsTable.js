@@ -8,6 +8,7 @@ import WordsGroup from "./WordsGroup";
 export default class WordsTable extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState){
+        console.log(" this.props.words != nextProps.words=",( this.props.words != nextProps.words))
         return this.props.words != nextProps.words;
     }
 

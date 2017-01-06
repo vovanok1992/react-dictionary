@@ -11,14 +11,18 @@ import Header from "../components/Header";
 
 class HeaderContainer extends React.Component {
     render() {
-        return <Header info={this.props.info}/>
+        return <Header info={this.props.info}
+                       optionsReverse={this.props.optionsReverse}
+                       reverseSorting={this.props.reverseSorting}/>
     }
 }
 
 export default connect(
     (state) => {
         return {
-            info: state.auth.info
+            info: state.auth.info,
+            optionsReverse: state.words.inverseSort
         };
-    }
+    },
+    (dispatch) => bindActionCreators({reverseSorting: WordActions.reverseSorting}, dispatch)
 )(HeaderContainer);

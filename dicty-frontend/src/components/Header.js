@@ -32,12 +32,12 @@ export default class Header extends React.Component {
                 <Navbar.Collapse>
                     <Nav>
                         {this.getSwitchButton()}
-                        <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+                        <NavDropdown eventKey={3} title="Options" id="basic-nav-dropdown">
                             <MenuItem eventKey={3.1}>Action</MenuItem>
                             <MenuItem eventKey={3.2}>Another action</MenuItem>
                             <MenuItem eventKey={3.3}>Something else here</MenuItem>
                             <MenuItem divider/>
-                            <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                            {this.getOptionsReverseButton()}
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
@@ -48,6 +48,13 @@ export default class Header extends React.Component {
         );
     }
 
+    getOptionsReverseButton() {
+        if (this.props.optionsReverse) {
+            return <MenuItem eventKey={3.3} onClick={() => this.props.reverseSorting(false)}>Sort ascending</MenuItem>
+        } else {
+            return <MenuItem eventKey={3.3} onClick={() => this.props.reverseSorting(true)}>Sort descending</MenuItem>
+        }
+    }
 
     getLoginButton(){
         if(this.props.info){

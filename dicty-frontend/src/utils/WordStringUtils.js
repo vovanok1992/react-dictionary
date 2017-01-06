@@ -15,10 +15,11 @@ export default class WordStringUtils {
         return word.toLowerCase().indexOf(inputtedWord.trim().toLowerCase()) != -1;
     }
 
-    static filterArray(words, text) {
-        return words.filter((word) => {
+    static filterArray(words, text, reverse) {
+        let filtered = words.filter((word) => {
             return this.testWord(word.en, text) || this.testWord(word.ru, text);
         });
+        return reverse ? filtered.reverse() : filtered;
     }
 
     static constructWord(fist, second) {

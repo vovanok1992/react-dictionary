@@ -20,17 +20,11 @@ export function newWordClicked() {
     return {type: "NEW_WORD_CLICKED"};
 }
 
-export function saveWord(fist, second) {
-    const word = WordUtils.constructWord(fist, second);
-    if (!word) {
-        return null;
-    }
-
-    LocalStorageWordsService.saveWord(word);
+export function reverseSorting(reverse) {
+    localStorage["options_reverse"] = reverse;
 
     return {
-        type: "SAVE_NEW_WORD",
-        payload: word
+        type: "CHANGE_SORT_DIRECTION"
     };
 }
 

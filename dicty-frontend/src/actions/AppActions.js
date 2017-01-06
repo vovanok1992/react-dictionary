@@ -28,6 +28,8 @@ export function init() {
 }
 
 function initData(dispatch) {
+    loadConfigFromLocalStorage(dispatch);
+
     axios.get("static/config.json")
         .then((data) => {
             dispatch({type: "CONFIG_LOADED"});
@@ -57,4 +59,14 @@ function auth(token) {
                 reject(error);
             })
     });
+}
+
+function loadConfigFromLocalStorage(dispatch) {
+
+    const reverse = localStorage["options_reverse"];
+
+    if(reverse === "true"){
+        dispatch({type: "CHANGE_SORT_DIRECTION"})
+    }
+    
 }
