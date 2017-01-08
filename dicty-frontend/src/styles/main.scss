@@ -256,3 +256,18 @@ html {
     font-size: 80%;
   }
 }
+
+
+/* --- Edit word dialog styles --- */
+
+.editWordFormContainer > .input-group {
+  margin-bottom: 10px;
+}
+
+.editWordInputLabel{
+  min-width: 60px;
+}
+
+.modalWarning {
+  margin-bottom: 0;
+}

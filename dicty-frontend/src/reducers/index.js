@@ -72,8 +72,18 @@ const googleAuthReducer = (state = {token: null, info: null}, action) => {
     return state;
 };
 
+const editWordReducer = (state = null, action) => {
+    switch(action.type){
+        case "WORD_EDITED":
+        case "WORD_CLICKED":
+            return action.payload
+    }
+    return state;
+};
+
 export default combineReducers({
     words: WordsReducer,
+    editWord: editWordReducer,
     selectedWord: selectedWordReducer,
     translatedWord: translateReducer,
     loading: loadingReducer,

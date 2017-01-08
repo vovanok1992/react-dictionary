@@ -16,6 +16,20 @@ export function inputWordChanged(word) {
     };
 }
 
+export function wordClicked(word) {
+    return {
+        type: "WORD_CLICKED",
+        payload: word
+    }
+}
+
+export function wordEdited(word) {
+    return {
+        type: "WORD_EDITED",
+        payload: word
+    }
+}
+
 export function newWordClicked() {
     return {type: "NEW_WORD_CLICKED"};
 }
