@@ -49,27 +49,25 @@ export function saveOnServer(fistWord, secondWord, token) {
         return null;
     }
 
+    const sendData = {
+        "word": word,
+        "token": token
+    };
+
     return (dispatch) => {
         dispatch({type: "LOADING", payload: true});
+
         axios.get("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + token)
-            .then((data) => {
-                axios.post(config.getBackendServer() + "saveword", {
-                    "word": word,
-                    "token": token
-                }).then((data) => {
-                    if(data.data.response == "OK"){
-                        dispatch({type: "SAVE_NEW_WORD", payload: word});
-                    } else {
-                        alert("ERROR validating google token. " + data.data.code);
-                    }
-                    dispatch({type: "LOADING", payload: false});
-                }).catch((e) => {
-                    alert("Unknown error");
-                    console.log("Error", e);
-                    dispatch({type: "LOADING", payload: false});
-                })
+            .then(() => axios.post(config.getBackendServer() + "saveword", sendData))
+            .then(({data}) => {
+                if (data.response == "OK") {
+                    dispatch({type: "SAVE_NEW_WORD", payload: word});
+                } else {
+                    alert("ERROR validating google token. " + data.code);
+                }
+                dispatch({type: "LOADING", payload: false});
             })
-            .catch((error) => {
+            .catch(() => {
                 alert("Sorry, but your temp token is not valid any more. Please relogin");
                 dispatch({type: "GOOGLE_ACCESS_TOKEN", payload: null});
                 dispatch({type: "GOOGLE_PROFILE", payload: null});

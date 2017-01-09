@@ -11,19 +11,19 @@ export function init() {
     return (dispatch) => {
         dispatch({type: "LOADING", payload: true});
         const token = processTempToken();
-        if (token) {
-            dispatch({type: "GOOGLE_ACCESS_TOKEN", payload: token});
-            auth(token)
-                .then((resolve) => {
-                    dispatch({type: "GOOGLE_PROFILE", payload: resolve});
-                    initData(dispatch);
-                }, (reject) => {
-                    alert("Error while authenticating");
-                    initData(dispatch);
-                });
-        } else {
+        if (!token) {
             initData(dispatch);
+            return;
         }
+        dispatch({type: "GOOGLE_ACCESS_TOKEN", payload: token});
+        auth(token)
+            .then((data) => {
+                dispatch({type: "GOOGLE_PROFILE", payload: data});
+                initData(dispatch);
+            }).catch(() => {
+                alert("Error while authenticating");
+                initData(dispatch);
+            });
     };
 }
 
@@ -44,29 +44,14 @@ function initData(dispatch) {
 }
 
 function auth(token) {
-    return new Promise((resolve, reject) => {
-        axios.get("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + token)
-            .then((data) => {
-                axios.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" + token)
-                    .then((data) => {
-                        resolve(data.data);
-                    })
-                    .catch((error) => {
-                        reject(error);
-                    })
-            })
-            .catch((error) => {
-                reject(error);
-            })
-    });
+    return axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${token}`)
+        .then(() => axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${token}`)) // Это не выполниться если зафейлит первый ?
+        .then(({data}) => data)
 }
 
 function loadConfigFromLocalStorage(dispatch) {
-
-    const reverse = localStorage["options_reverse"];
-
+    const reverse = localStorage.options_reverse;
     if(reverse === "true"){
         dispatch({type: "CHANGE_SORT_DIRECTION"})
     }
-    
 }
