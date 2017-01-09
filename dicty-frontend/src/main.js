@@ -18,6 +18,8 @@ import { syncHistoryWithStore } from "react-router-redux";
 const history = syncHistoryWithStore(hashHistory, store);
 store.dispatch(init());
 
+document.getElementById("app").innerHTML = "";
+
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
