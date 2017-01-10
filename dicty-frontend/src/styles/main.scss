@@ -209,8 +209,9 @@ html {
 .wordsTableContainer {
   margin-bottom: 20px;
   box-shadow: 0 0 22px rgba(0, 0, 0, 0.4);
-  border-radius: 2px;
+  border-radius: 3px;
   transform: translate3d(0,0,0);
+  overflow: hidden;
 }
 
 .group {
