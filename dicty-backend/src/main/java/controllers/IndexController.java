@@ -81,13 +81,13 @@ public class IndexController {
 
     @RequestMapping(value = "/removeword", method = RequestMethod.POST)
     @ResponseBody
-    public String remove(long wordId, String token, HttpServletRequest request){
-        logPageLoad("remove word token=" + token, request);
+    public String remove(@RequestBody SaveWordBean data, HttpServletRequest request){
+        logPageLoad("remove word token=" + data.getToken(), request);
 
-        String x = validateToken(token);
+        String x = validateToken(data.getToken());
         if (x != null) return x;
 
-        databaseService.getDatabase().delete(Word.class, wordId);
+        databaseService.getDatabase().delete(Word.class, data.getWord().getId());
         return "{ \"response\":\"OK\"}";
     }
 
