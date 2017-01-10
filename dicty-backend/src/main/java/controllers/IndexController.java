@@ -91,6 +91,17 @@ public class IndexController {
         return "{ \"response\":\"OK\"}";
     }
 
+    @RequestMapping(value = "/updateword", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateWord(@RequestBody SaveWordBean data, HttpServletRequest request) {
+        logPageLoad("update word token=" + data.getToken(), request);
+
+        String x = validateToken(data.getToken());
+        if (x != null) return x;
+        databaseService.getDatabase().merge(data.getWord());
+        return "{ \"response\":\"OK\"}";
+    }
+
     @RequestMapping(value = "/saveword", method = RequestMethod.POST)
     @ResponseBody
     public String save(@RequestBody SaveWordBean data, HttpServletRequest request) {
