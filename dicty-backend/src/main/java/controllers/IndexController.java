@@ -79,14 +79,34 @@ public class IndexController {
         return "OK";
     }
 
+    @RequestMapping(value = "/removeword", method = RequestMethod.POST)
+    @ResponseBody
+    public String remove(long wordId, String token, HttpServletRequest request){
+        logPageLoad("remove word token=" + token, request);
+
+        String x = validateToken(token);
+        if (x != null) return x;
+
+        databaseService.getDatabase().delete(Word.class, wordId);
+        return "{ \"response\":\"OK\"}";
+    }
+
     @RequestMapping(value = "/saveword", method = RequestMethod.POST)
     @ResponseBody
     public String save(@RequestBody SaveWordBean data, HttpServletRequest request) {
         logPageLoad("save word token=" + data.getToken(), request);
 
+        String x = validateToken(data.getToken());
+        if (x != null) return x;
+
+        databaseService.getDatabase().save(data.getWord());
+        return "{ \"response\":\"OK\"}";
+    }
+
+    private String validateToken(String token) {
         String result = null;
         try {
-            result = RequestSender.post("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + data.getToken());
+            result = RequestSender.post("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + token);
         } catch (Exception e) {
             return "{ \"response\":\"FAIL\", \"code\":1 }";
         }
@@ -102,9 +122,7 @@ public class IndexController {
         if (resp.get("email") == null || !resp.get("email").equals("vovanok1992@gmail.com")) {
             return "{ \"response\":\"FAIL\", \"code\":3 }";
         }
-
-        databaseService.getDatabase().save(data.getWord());
-        return "{ \"response\":\"OK\"}";
+        return null;
     }
 
     private void logPageLoad(String page, HttpServletRequest request) {
