@@ -41,15 +41,27 @@ export default function (state = baseState, action) {
         case "NEW_WORD_CLICKED" :
             return {...state, forceNewWordInput: true};
 
-        case "SAVE_NEW_WORD" :
+        case "SAVE_NEW_WORD" : {
             const newWords = state.words.concat(action.payload);
             return {
                 ...state,
                 words: newWords,
                 inputWord: "",
-                filtered: newWords,
+                filtered: state.inverseSort ? [...newWords].reverse() : newWords,
                 forceNewWordInput: false
             };
+        }
+
+        case "WORD_REMOVED": {
+            const newWords = state.words.filter((w) => {
+                return w.id !== action.payload.id
+            });
+            return {
+                ...state,
+                words: newWords,
+                filtered: WordStringUtils.filterArray(newWords, state.inputWord, state.inverseSort)
+            };
+        }
 
         default:
             return state;

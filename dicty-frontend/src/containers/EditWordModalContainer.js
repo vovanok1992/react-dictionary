@@ -15,7 +15,9 @@ class DefinitionModalContainer extends React.Component {
             <EditWordModal word={this.props.word}
                            wordClicked={this.props.wordClicked}
                            loadDefinition={this.props.loadDefinition}
-                           wordEdited={this.props.wordEdited} />
+                           wordEdited={this.props.wordEdited}
+                           token={this.props.token}
+                           removeWordOnServer={this.props.removeWordOnServer}/>
         );
     }
 }
@@ -23,12 +25,14 @@ class DefinitionModalContainer extends React.Component {
 export default connect(
     (state) => {
         return {
-            word: state.editWord
+            word: state.editWord,
+            token: state.auth.token
         };
     },
     (dispatch) => bindActionCreators({
         wordClicked: WordActions.wordClicked,
         loadDefinition: WordActions.loadDefinition,
-        wordEdited: WordActions.wordEdited
+        wordEdited: WordActions.wordEdited,
+        removeWordOnServer: WordActions.removeWordOnServer
     }, dispatch)
 )(DefinitionModalContainer);

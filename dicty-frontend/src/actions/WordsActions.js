@@ -43,38 +43,16 @@ export function reverseSorting(reverse) {
 }
 
 export function saveOnServer(fistWord, secondWord, token) {
-
     const word = WordUtils.constructWord(fistWord, secondWord);
     if (!word) {
         return null;
     }
+    const sendData = {"word": word, "token": token};
+    return sendDataToTheServer("saveword", token, sendData, {type: "SAVE_NEW_WORD", payload: word})
+}
 
-    const sendData = {
-        "word": word,
-        "token": token
-    };
-
-    return (dispatch) => {
-        dispatch({type: "LOADING", payload: true});
-
-        axios.get("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + token)
-            .then(() => axios.post(config.getBackendServer() + "saveword", sendData))
-            .then(({data}) => {
-                if (data.response == "OK") {
-                    dispatch({type: "SAVE_NEW_WORD", payload: word});
-                } else {
-                    alert("ERROR validating google token. " + data.code);
-                }
-                dispatch({type: "LOADING", payload: false});
-            })
-            .catch(() => {
-                alert("Sorry, but your temp token is not valid any more. Please relogin");
-                dispatch({type: "GOOGLE_ACCESS_TOKEN", payload: null});
-                dispatch({type: "GOOGLE_PROFILE", payload: null});
-                dispatch({type: "LOADING", payload: false});
-            })
-
-    }
+export function removeWordOnServer(word, token) {
+    return sendDataToTheServer("removeword", token, {token: token, word: word}, {type: "WORD_REMOVED", payload: word})
 }
 
 export function loadTranslation(word) {
@@ -108,5 +86,28 @@ export function loadIrrVerbs() {
                 dispatch({type: "LOADING", payload: false});
             });
     };
+}
 
+function sendDataToTheServer(url, token, sendData, onSuccessAction) {
+    return (dispatch) => {
+        dispatch({type: "LOADING", payload: true});
+
+        axios.get("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + token)
+            .then(() => axios.post(config.getBackendServer() + url, sendData))
+            .then(({data}) => {
+                if (data.response == "OK") {
+                    dispatch(onSuccessAction);
+                } else {
+                    alert("ERROR validating google token. " + data.code);
+                }
+                dispatch({type: "LOADING", payload: false});
+            })
+            .catch(() => {
+                alert("Sorry, but your temp token is not valid any more. Please relogin");
+                dispatch({type: "GOOGLE_ACCESS_TOKEN", payload: null});
+                dispatch({type: "GOOGLE_PROFILE", payload: null});
+                dispatch({type: "LOADING", payload: false});
+            })
+
+    }
 }

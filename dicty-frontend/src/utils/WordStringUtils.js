@@ -16,6 +16,7 @@ export default class WordStringUtils {
     }
 
     static filterArray(words, text, reverse) {
+        console.log("REVERSE=", reverse)
         let filtered = words.filter((word) => {
             return this.testWord(word.en, text) || this.testWord(word.ru, text);
         });

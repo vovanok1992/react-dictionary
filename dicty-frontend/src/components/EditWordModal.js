@@ -58,7 +58,7 @@ export default class EditWordModal extends React.Component {
                     {this.getEditForm()}
 
                     <div className="alert alert-warning modalWarning">
-                        <strong>Warning!</strong> Update and save functions not implemented yet !
+                        <strong>Warning!</strong> Update function not implemented yet !
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
@@ -69,7 +69,13 @@ export default class EditWordModal extends React.Component {
                         }}>
                         <span className="glyphicon glyphicon-question-sign" />&nbsp;
                         Definition</Button>
-                    <Button bsStyle="danger" disabled={true}>
+                    <Button bsStyle="danger"
+                            onClick={() => {
+                                if(confirm("Are you sure you want to delete word [" + this.props.word.en + "]")){
+                                    this.props.removeWordOnServer(this.props.word, this.props.token);
+                                    this.props.wordClicked(null);
+                                }
+                            }}>
                         <span className="glyphicon glyphicon-remove" />&nbsp;
                         Remove</Button>
                     <Button bsStyle="primary" disabled={true}>
