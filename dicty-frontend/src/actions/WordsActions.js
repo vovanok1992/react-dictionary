@@ -55,6 +55,10 @@ export function removeWordOnServer(word, token) {
     return sendDataToTheServer("removeword", token, {token: token, word: word}, {type: "WORD_REMOVED", payload: word})
 }
 
+export function updateWordOnServer(word, token) {
+    return sendDataToTheServer("updateword", token, {token: token, word: word}, {type: "WORD_UPDATED", payload: word})
+}
+
 export function loadTranslation(word) {
     return {
         type: "WORD_TRANSLATION",

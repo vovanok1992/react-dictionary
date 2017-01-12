@@ -17,7 +17,8 @@ class DefinitionModalContainer extends React.Component {
                            loadDefinition={this.props.loadDefinition}
                            wordEdited={this.props.wordEdited}
                            token={this.props.token}
-                           removeWordOnServer={this.props.removeWordOnServer}/>
+                           removeWordOnServer={this.props.removeWordOnServer}
+                           updateWordOnServer={this.props.updateWordOnServer}/>
         );
     }
 }
@@ -33,6 +34,7 @@ export default connect(
         wordClicked: WordActions.wordClicked,
         loadDefinition: WordActions.loadDefinition,
         wordEdited: WordActions.wordEdited,
-        removeWordOnServer: WordActions.removeWordOnServer
+        removeWordOnServer: WordActions.removeWordOnServer,
+        updateWordOnServer: WordActions.updateWordOnServer
     }, dispatch)
 )(DefinitionModalContainer);

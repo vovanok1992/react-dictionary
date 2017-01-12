@@ -7,14 +7,14 @@ import Button from "react-bootstrap/lib/Button";
 
 export default class EditWordModal extends React.Component {
 
-    wordUpdated(field, value){
+    wordUpdated(field, value) {
         const clone = {...this.props.word};
         clone[field] = value;
         this.props.wordEdited(clone);
     }
 
-    getEditForm(){
-        if(this.props.word == null){
+    getEditForm() {
+        if (this.props.word == null) {
             return null;
         }
 
@@ -25,7 +25,7 @@ export default class EditWordModal extends React.Component {
                        onChange={(e) => this.wordUpdated("en", e.target.value)}
                        type="text"
                        className="form-control"
-                       placeholder="English word" />
+                       placeholder="English word"/>
             </div>
 
             <div className="input-group">
@@ -34,7 +34,7 @@ export default class EditWordModal extends React.Component {
                        onChange={(e) => this.wordUpdated("ru", e.target.value)}
                        type="text"
                        className="form-control"
-                       placeholder="Russian word" />
+                       placeholder="Russian word"/>
             </div>
 
             <div className="input-group">
@@ -43,7 +43,7 @@ export default class EditWordModal extends React.Component {
                        onChange={(e) => this.wordUpdated("date", e.target.value)}
                        type="text"
                        className="form-control"
-                       placeholder="date group" />
+                       placeholder="date group"/>
             </div>
         </div>);
     }
@@ -56,30 +56,30 @@ export default class EditWordModal extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     {this.getEditForm()}
-
-                    <div className="alert alert-warning modalWarning">
-                        <strong>Warning!</strong> Update function not implemented yet !
-                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button bsStyle="info"
-                        onClick={() => {
-                            this.props.loadDefinition(this.props.word.en);
-                            this.props.wordClicked(null);
-                        }}>
-                        <span className="glyphicon glyphicon-question-sign" />&nbsp;
+                            onClick={() => {
+                                this.props.loadDefinition(this.props.word.en);
+                                this.props.wordClicked(null);
+                            }}>
+                        <span className="glyphicon glyphicon-question-sign"/>&nbsp;
                         Definition</Button>
                     <Button bsStyle="danger"
                             onClick={() => {
-                                if(confirm("Are you sure you want to delete word [" + this.props.word.en + "]")){
+                                if (confirm("Are you sure you want to delete word [" + this.props.word.en + "]")) {
                                     this.props.removeWordOnServer(this.props.word, this.props.token);
                                     this.props.wordClicked(null);
                                 }
                             }}>
-                        <span className="glyphicon glyphicon-remove" />&nbsp;
+                        <span className="glyphicon glyphicon-remove"/>&nbsp;
                         Remove</Button>
-                    <Button bsStyle="primary" disabled={true}>
-                        <span className="glyphicon glyphicon-ok" />&nbsp;
+                    <Button bsStyle="primary"
+                            onClick={() => {
+                                this.props.updateWordOnServer(this.props.word, this.props.token);
+                                this.props.wordClicked(null);
+                            }}>
+                        <span className="glyphicon glyphicon-ok"/>&nbsp;
                         Save</Button>
                 </Modal.Footer>
             </Modal>

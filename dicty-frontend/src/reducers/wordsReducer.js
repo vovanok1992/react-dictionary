@@ -63,6 +63,22 @@ export default function (state = baseState, action) {
             };
         }
 
+        case "WORD_UPDATED": {
+            const index = state.words.findIndex((item) => item.id === action.payload.id);
+            const newArray = [
+                ...state.words.slice(0, index),
+                action.payload,
+                ...state.words.slice(index + 1)
+            ];
+
+            return {
+                ...state,
+                words: newArray,
+                filtered: WordStringUtils.filterArray(newArray, state.inputWord, state.inverseSort)
+            };
+        }
+
+
         default:
             return state;
     }
