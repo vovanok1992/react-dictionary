@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "bootstrap-css-only": "^3.3.7",
     "classnames": "^2.2.5",
     "es6-promise": "^4.0.5",
     "react": "15.x",
