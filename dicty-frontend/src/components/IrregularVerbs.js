@@ -34,7 +34,7 @@ export default class IrregularVerbs extends React.Component {
     generateTableContent() {
         return this.props.verbs
             .filter((word) => {
-                return (word.inf + word.ps + word.pp + word.tr).indexOf(this.state.text) != -1;
+                return (word.inf + word.ps + word.pp + word.tr).indexOf(this.state.text.toLocaleLowerCase()) != -1;
             })
             .map((word, id) => {
                 return <tr key={id} onClick={() => this.props.loadDefinition(word.inf)}>
