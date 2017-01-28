@@ -119,6 +119,7 @@ public class IndexController {
         try {
             result = RequestSender.post("https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=" + token);
         } catch (Exception e) {
+            logger.error("ERROR, code 1: ", e);
             return "{ \"response\":\"FAIL\", \"code\":1 }";
         }
         Map<String, String> resp = null;
